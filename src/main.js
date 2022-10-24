@@ -19,6 +19,9 @@ import {inventory_controller} from './inventory-controller.js';
 import {equip_weapon_component} from './equip-weapon-component.js';
 import {attack_controller} from './attacker-controller.js';
 
+import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/GLTFLoader.js';
+
+
 
 const _VS = `
 varying vec3 vWorldPosition;
@@ -102,15 +105,18 @@ class HackNSlashDemo {
         new THREE.MeshStandardMaterial({
             color: 0x1e601c,
           }));
+
     plane.castShadow = false;
     plane.receiveShadow = true;
     plane.rotation.x = -Math.PI / 2;
     this._scene.add(plane);
 
+
     this._entityManager = new entity_manager.EntityManager();
     this._grid = new spatial_hash_grid.SpatialHashGrid(
         [[-1000, -1000], [1000, 1000]], [100, 100]);
-
+    
+    //this._LoadTerrain();
     this._LoadControllers();
     this._LoadPlayer();
     this._LoadFoliage();
@@ -120,7 +126,44 @@ class HackNSlashDemo {
     this._previousRAF = null;
     this._RAF();
   }
-
+  _LoadTerrain(){
+    const m = [
+      {
+        resourceTexture: 'Bark_baseColor.png',
+      },
+      {
+        resourceTexture: 'Bark2_baseColor.png',
+      },
+      {
+        resourceTexture: 'Leaves.001_baseColor.png',
+      },
+      {
+        resourceTexture: 'Leaves2_baseColor.png',
+      },
+      {
+        resourceTexture: 'Road_baseColor.png',
+      },
+      {
+        resourceTexture: 'Rock_normal.png',
+      },
+      {
+        resourceTexture: 'TerrainShader_baseColor.png',
+      }, 
+    ]
+    const terrain = new entity.Entity();
+    terrain.AddComponent(new gltf_component.StaticModelComponent({
+      scene: this._scene,
+      resourcePath: './resources/tabletop_terrain/',
+      resourceName: 'scene.gltf',
+      resourceTexture: m.resourceTexture,
+      receiveShadow: true,
+      castShadow: true,
+    }));
+   
+    this._entityManager.Add(terrain);
+  
+      
+  }
   _LoadControllers() {
     const ui = new entity.Entity();
     ui.AddComponent(new ui_controller.UIController());
