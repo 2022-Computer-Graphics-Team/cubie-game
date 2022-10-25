@@ -111,19 +111,42 @@ class HackNSlashDemo {
     // plane.rotation.x = -Math.PI / 2;
     // this._scene.add(plane);
           
+    // ground
+		var mesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( 2000, 2000 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
+		mesh.rotation.x = - Math.PI / 2;
+		mesh.receiveShadow = true;
+
+		var grid = new THREE.GridHelper( 2000, 40, 0x000000, 0x000000 );
+		grid.material.opacity = 0.2;
+		grid.material.transparent = true;
 
     this._entityManager = new entity_manager.EntityManager();
     this._grid = new spatial_hash_grid.SpatialHashGrid(
         [[-1000, -1000], [1000, 1000]], [100, 100]);
     
+    // const e = new entity.Entity();
+    // var pos =  new THREE.Vector3(300,-150,100)
+    // e.AddComponent(new gltf_component.StaticModelComponent({
+    //   scene: this._scene,
+    //   resourcePath: './resources/tabletop_terrain/',
+    //   resourceName: 'scene.gltf',
+    //   scale: //Math.random() * 5 + 10,
+    //   10,
+    //   position: pos,
+
+    // }));
+    // e.SetPosition(pos);
+    // this._entityManager.Add(e);
+    // e.SetActive(false);
+    
     const e = new entity.Entity();
-    var pos =  new THREE.Vector3(300,-150,100)
+    var pos =  new THREE.Vector3(0,245,0)
     e.AddComponent(new gltf_component.StaticModelComponent({
       scene: this._scene,
-      resourcePath: './resources/tabletop_terrain/',
+      resourcePath: './resources/folder_1_beach_island/',
       resourceName: 'scene.gltf',
       scale: //Math.random() * 5 + 10,
-      10,
+      0.5,
       position: pos,
 
     }));
@@ -133,7 +156,7 @@ class HackNSlashDemo {
 
     this._LoadControllers();
     this._LoadPlayer();
-    this._LoadClouds();
+    //this._LoadClouds();
     this._LoadSky();
 
     this._previousRAF = null;
@@ -145,6 +168,7 @@ class HackNSlashDemo {
     ui.AddComponent(new ui_controller.UIController());
     this._entityManager.Add(ui, 'ui');
   }
+  
 
   _LoadSky() {
     const hemiLight = new THREE.HemisphereLight(0xFFFFFF, 0xFFFFFFF, 0.6);
