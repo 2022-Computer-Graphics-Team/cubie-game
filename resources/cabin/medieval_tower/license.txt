@@ -1,0 +1,11 @@
+Model Information:
+* title:	Medieval Tower
+* source:	https://sketchfab.com/3d-models/medieval-tower-6c821f2aae3b4e8db5d94c6f48fb568b
+* author:	Den (https://sketchfab.com/dfomenco)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Medieval Tower" (https://sketchfab.com/3d-models/medieval-tower-6c821f2aae3b4e8db5d94c6f48fb568b) by Den (https://sketchfab.com/dfomenco) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
