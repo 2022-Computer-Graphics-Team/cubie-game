@@ -1,0 +1,11 @@
+Model Information:
+* title:	Folder 1: Beach Island
+* source:	https://sketchfab.com/3d-models/folder-1-beach-island-244c515a50dd4f629d57cc05f6333292
+* author:	beewee (https://sketchfab.com/beewee)
+
+Model License:
+* license type:	CC-BY-NC-ND-4.0 (http://creativecommons.org/licenses/by-nc-nd/4.0/)
+* requirements:	Author must be credited. No commercial use. Modified versions can not be distributed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Folder 1: Beach Island" (https://sketchfab.com/3d-models/folder-1-beach-island-244c515a50dd4f629d57cc05f6333292) by beewee (https://sketchfab.com/beewee) licensed under CC-BY-NC-ND-4.0 (http://creativecommons.org/licenses/by-nc-nd/4.0/)
