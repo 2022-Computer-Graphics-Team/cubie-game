@@ -116,7 +116,6 @@ class HackNSlashDemo {
     this._grid = new spatial_hash_grid.SpatialHashGrid(
         [[-1000, -1000], [1000, 1000]], [100, 100]);
     
-    //this._LoadTerrain();
     this._LoadControllers();
     this._LoadPlayer();
     this._LoadFoliage();
@@ -126,44 +125,7 @@ class HackNSlashDemo {
     this._previousRAF = null;
     this._RAF();
   }
-  _LoadTerrain(){
-    const m = [
-      {
-        resourceTexture: 'Bark_baseColor.png',
-      },
-      {
-        resourceTexture: 'Bark2_baseColor.png',
-      },
-      {
-        resourceTexture: 'Leaves.001_baseColor.png',
-      },
-      {
-        resourceTexture: 'Leaves2_baseColor.png',
-      },
-      {
-        resourceTexture: 'Road_baseColor.png',
-      },
-      {
-        resourceTexture: 'Rock_normal.png',
-      },
-      {
-        resourceTexture: 'TerrainShader_baseColor.png',
-      }, 
-    ]
-    const terrain = new entity.Entity();
-    terrain.AddComponent(new gltf_component.StaticModelComponent({
-      scene: this._scene,
-      resourcePath: './resources/tabletop_terrain/',
-      resourceName: 'scene.gltf',
-      resourceTexture: m.resourceTexture,
-      receiveShadow: true,
-      castShadow: true,
-    }));
-   
-    this._entityManager.Add(terrain);
-  
-      
-  }
+
   _LoadControllers() {
     const ui = new entity.Entity();
     ui.AddComponent(new ui_controller.UIController());

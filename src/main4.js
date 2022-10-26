@@ -19,10 +19,6 @@ import {inventory_controller} from './inventory-controller.js';
 import {equip_weapon_component} from './equip-weapon-component.js';
 import {attack_controller} from './attacker-controller.js';
 
-import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/GLTFLoader.js';
-
-
-
 const _VS = `
 varying vec3 vWorldPosition;
 
@@ -100,75 +96,134 @@ class HackNSlashDemo {
 
     this._sun = light;
 
-    // const plane = new THREE.Mesh(
-    //     new THREE.PlaneGeometry(500, 500, 10, 10),
-    //     new THREE.MeshStandardMaterial({
-    //         color: 0x1e601c,
-    //       }));A
-
-    // plane.castShadow = false;
-    // plane.receiveShadow = true;
-    // plane.rotation.x = -Math.PI / 2;
-    // this._scene.add(plane);
-          
-    // ground
-		var mesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( 2000, 2000 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
-		mesh.rotation.x = - Math.PI / 2;
-		mesh.receiveShadow = true;
-
-		var grid = new THREE.GridHelper( 2000, 40, 0x000000, 0x000000 );
-		grid.material.opacity = 0.2;
-		grid.material.transparent = true;
+    const textureLoader = new THREE.TextureLoader();
+    //const sand = textureLoader.load('./resources/folder_1_beach_island/textures/blinn4_baseColor.png')
+    const sand = textureLoader.load('./resources/folder_1_beach_island/textures/SandCastleMaterial_baseColor.png')
+    const sea = textureLoader.load('./resources/folder_1_beach_island/textures/sea.jpg')
+    const plane = new THREE.Mesh(
+      new THREE.PlaneGeometry(1200, 1200, 0, 0),
+      new THREE.MeshStandardMaterial({
+          map: sand
+        }));
+        
+    plane.castShadow = false;
+    plane.receiveShadow = true;
+    plane.rotation.x = -Math.PI / 2;
+    this._scene.add(plane);
 
     this._entityManager = new entity_manager.EntityManager();
     this._grid = new spatial_hash_grid.SpatialHashGrid(
         [[-1000, -1000], [1000, 1000]], [100, 100]);
-    
-    // const e = new entity.Entity();
-    // var pos =  new THREE.Vector3(300,-150,100)
-    // e.AddComponent(new gltf_component.StaticModelComponent({
-    //   scene: this._scene,
-    //   resourcePath: './resources/tabletop_terrain/',
-    //   resourceName: 'scene.gltf',
-    //   scale: //Math.random() * 5 + 10,
-    //   10,
-    //   position: pos,
 
-    // }));
-    // e.SetPosition(pos);
-    // this._entityManager.Add(e);
-    // e.SetActive(false);
-    
-    const e = new entity.Entity();
-    var pos =  new THREE.Vector3(0,245,0)
-    e.AddComponent(new gltf_component.StaticModelComponent({
-      scene: this._scene,
-      resourcePath: './resources/folder_1_beach_island/',
-      resourceName: 'scene.gltf',
-      scale: //Math.random() * 5 + 10,
-      0.5,
-      position: pos,
-
-    }));
-    e.SetPosition(pos);
-    this._entityManager.Add(e);
-    e.SetActive(false);
-
+    this._LoadSea();
+    this._LoadFoliage()
     this._LoadControllers();
     this._LoadPlayer();
-    //this._LoadClouds();
+    this._LoadClouds();
     this._LoadSky();
 
     this._previousRAF = null;
     this._RAF();
   }
-  
+  _LoadSea(){
+    const e = new entity.Entity();
+    var pos =  new THREE.Vector3(1500,50,0)
+    e.AddComponent(new gltf_component.StaticModelComponent({
+        scene: this._scene,
+        resourcePath: './resources/folder_1_beach_island/',
+        resourceName: 'sea.gltf',
+        scale: //Math.random() * 5 + 10,
+        2.5,
+        position: pos,
+    }));
+
+    e.SetPosition(pos);
+    this._entityManager.Add(e);
+    e.SetActive(false);
+
+    const e2 = new entity.Entity();
+    var pos =  new THREE.Vector3(-1500,50,0)
+    e2.AddComponent(new gltf_component.StaticModelComponent({
+        scene: this._scene,
+        resourcePath: './resources/folder_1_beach_island/',
+        resourceName: 'sea.gltf',
+        scale: //Math.random() * 5 + 10,
+        2.5,
+        position: pos,
+    }));
+    e2.SetPosition(pos);
+    this._entityManager.Add(e2);
+    e2.SetActive(false);
+
+    const e3 = new entity.Entity();
+    var pos =  new THREE.Vector3(0,30,850)
+    e3.AddComponent(new gltf_component.StaticModelComponent({
+        scene: this._scene,
+        resourcePath: './resources/folder_1_beach_island/',
+        resourceName: 'sea.gltf',
+        scale: //Math.random() * 5 + 10,
+        2.5,
+        position: pos,
+    }));
+    e3.SetPosition(pos);
+    this._entityManager.Add(e3);
+    e3.SetActive(false);
+
+    const e4 = new entity.Entity();
+    var pos =  new THREE.Vector3(0,30,-850)
+    e4.AddComponent(new gltf_component.StaticModelComponent({
+        scene: this._scene,
+        resourcePath: './resources/folder_1_beach_island/',
+        resourceName: 'sea.gltf',
+        scale: //Math.random() * 5 + 10,
+        2.5,
+        position: pos,
+    }));
+    e4.SetPosition(pos);
+    this._entityManager.Add(e4);
+    e4.SetActive(false);
+  }
+
   _LoadControllers() {
     const ui = new entity.Entity();
     ui.AddComponent(new ui_controller.UIController());
     this._entityManager.Add(ui, 'ui');
   }
-  
+
+   _LoadFoliage() {
+    for (let i = 0; i < 150; ++i) {
+      const names = [
+          'CommonTree_Dead', 'CommonTree',
+          'BirchTree', 'BirchTree_Dead',
+          'Willow', 'Willow_Dead',
+          'PineTree','Rock'
+      ];
+      const name = names[math.rand_int(0, names.length - 1)];
+      const index = math.rand_int(1, 5);
+
+      const pos = new THREE.Vector3(
+          (Math.random() * 2.0 - 1.0) * 500,
+          0,
+          (Math.random() * 2.0 - 1.0) * 500);
+
+      const e = new entity.Entity();
+      e.AddComponent(new gltf_component.StaticModelComponent({
+        scene: this._scene,
+        resourcePath: './resources/nature/FBX/',
+        resourceName: name + '_' + index + '.fbx',
+        scale: 0.25,
+        emissive: new THREE.Color(0x000000),
+        specular: new THREE.Color(0x000000),
+        receiveShadow: true,
+        castShadow: true,
+      }));
+      e.AddComponent(
+          new spatial_grid_controller.SpatialGridController({grid: this._grid}));
+      e.SetPosition(pos);
+      this._entityManager.Add(e);
+      e.SetActive(false);
+    }
+  }
 
   _LoadSky() {
     const hemiLight = new THREE.HemisphereLight(0xFFFFFF, 0xFFFFFFF, 0.6);
@@ -199,7 +254,7 @@ class HackNSlashDemo {
   }
 
   _LoadClouds() {
-    for (let i = 0; i < 20; ++i) {
+    for (let i = 0; i < 30; ++i) {
       const index = math.rand_int(1, 3);
     const pos = new THREE.Vector3(
         (Math.random() * 2.0 - 1.0) * 500,
