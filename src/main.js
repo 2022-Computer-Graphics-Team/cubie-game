@@ -117,6 +117,7 @@ class HackNSlashDemo {
     this._LoadClouds();
     this._LoadSky();
     this._LoadHouse();
+    this._LoadPortal();
 
   const e1 = new entity.Entity();
     var pos =  new THREE.Vector3(2000,100,100)
@@ -192,7 +193,33 @@ class HackNSlashDemo {
       e.SetActive(false);
     }
   }
+  _LoadPortal() {
   
+
+    const pos = new THREE.Vector3(
+        (1 * 2.0 - 1.0) * 500-100,
+        0,
+        (1 * 2.0 - 1.0) * 500-100);
+
+    const e = new entity.Entity();
+    e.AddComponent(new gltf_component.StaticModelComponent({
+      scene: this._scene,
+      resourcePath: './resources/magic_portal/',
+      resourceName: 'scene.gltf',
+      scale: 10,
+      emissive: new THREE.Color(0x000000),
+      specular: new THREE.Color(0x000000),
+      receiveShadow: true,
+      castShadow: true,
+    }));
+    e.AddComponent(
+        new spatial_grid_controller.SpatialGridController({grid: this._grid}));
+    e.SetPosition(pos);
+    this._entityManager.Add(e);
+    e.SetActive(false);
+  
+}
+
   _LoadHouse() {
   
 
