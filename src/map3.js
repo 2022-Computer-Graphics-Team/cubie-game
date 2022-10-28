@@ -118,7 +118,6 @@ class HackNSlashDemo {
         this._LoadPlayer();
         this._LoadClouds();
         this._LoadSky();
-        this._LoadTool();
         this._previousRAF = null;
         this._RAF();
     }
@@ -136,7 +135,7 @@ class HackNSlashDemo {
         }));
 
         e.SetPosition(pos);
-        this._entityManager.Add(e,'sea1');
+        this._entityManager.Add(e, 'sea1');
         e.SetActive(false);
 
         const e2 = new entity.Entity();
@@ -149,7 +148,7 @@ class HackNSlashDemo {
             position: pos,
         }));
         e2.SetPosition(pos);
-        this._entityManager.Add(e2,'sea2');
+        this._entityManager.Add(e2, 'sea2');
         e2.SetActive(false);
 
         const e3 = new entity.Entity();
@@ -162,7 +161,7 @@ class HackNSlashDemo {
             position: pos,
         }));
         e3.SetPosition(pos);
-        this._entityManager.Add(e3,'sea3');
+        this._entityManager.Add(e3, 'sea3');
         e3.SetActive(false);
 
         const e4 = new entity.Entity();
@@ -175,7 +174,7 @@ class HackNSlashDemo {
             position: pos,
         }));
         e4.SetPosition(pos);
-        this._entityManager.Add(e4,'sea4');
+        this._entityManager.Add(e4, 'sea4');
         e4.SetActive(false);
     }
 
@@ -215,7 +214,7 @@ class HackNSlashDemo {
             e.AddComponent(
                 new spatial_grid_controller.SpatialGridController({grid: this._grid}));
             e.SetPosition(pos);
-            this._entityManager.Add(e,'Foliage');
+            this._entityManager.Add(e, 'Foliage');
             e.SetActive(false);
         }
     }
@@ -266,87 +265,8 @@ class HackNSlashDemo {
                 emissive: new THREE.Color(0x808080),
             }));
             e.SetPosition(pos);
-            this._entityManager.Add(e,'cloud');
+            this._entityManager.Add(e, 'cloud');
             e.SetActive(false);
-        }
-    }
-
-    _LoadTool() {
-        for (let i = 0; i < 20; i++) {
-            const tool_Item = [
-                {
-                    resourceName: 'Raft.fbx'
-                },
-                {
-                    resourceName: 'Raft_Paddle.fbx'
-                },
-                {
-                    resourceName: 'Torch.fbx'
-                },
-                {
-                    resourceName: 'WaterBottle_3.fbx'
-                },
-                {
-                    resourceName: 'FlareGun.fbx'
-                },
-                {
-                    resourceName: 'Compass_Open.fbx'
-                },
-                {
-                    resourceName: 'Battery_Big.fbx'
-                },
-                {
-                    resourceName: 'Backpack.fbx'
-                },
-                {
-                    resourceName: 'FirstAidKit_Hard.fbx'
-                }
-
-            ];
-            let m = null;
-            // 무조건 한 번씩 나올 수 있도록 생성
-            if (i < 9) {
-                m = tool_Item[i];
-            }
-            // 한 번씩 출력된 이후에는 랜덤으로 추가 생성
-            else {
-                m = tool_Item[math.rand_int(0, tool_Item.length - 1)];
-            }
-            const tool = new entity.Entity();
-
-            const pos = new THREE.Vector3(
-                (Math.random() * 2.0 - 1.0) * 300,
-                1,
-                (Math.random() * 2.0 - 1.0) * 300);
-
-            tool.AddComponent(new gltf_component.StaticModelComponent({
-                scene: this._scene,
-                resourcePath: './resources/Survival_Pack/FBX/',
-                resourceName: m.resourceName,
-                scale: 0.03,
-                position: pos,
-                receiveShadow: true,
-                castShadow: true,
-            }));
-            tool.AddComponent(
-                new health_component.HealthComponent({
-                    health: 50,
-                    maxHealth: 50,
-                    strength: 2,
-                    wisdomness: 0,
-                    benchpress: 0,
-                    curl: 0,
-                    experience: 0,
-                    level: 1,
-                }));
-            tool.AddComponent(
-                new spatial_grid_controller.SpatialGridController({grid: this._grid}));
-            tool.AddComponent(new health_bar.HealthBar({
-                parent: this._scene,
-                camera: this._camera,
-            }));
-            tool.SetPosition(pos);
-            this._entityManager.Add(tool,'tool');
         }
     }
 
@@ -373,7 +293,7 @@ class HackNSlashDemo {
                 icon: 'war-axe-64.png',
             },
         }));
-        this._entityManager.Add(axe,'axe');
+        this._entityManager.Add(axe, 'axe');
 
         const sword = new entity.Entity();
         sword.AddComponent(new inventory_controller.InventoryItem({
@@ -385,19 +305,19 @@ class HackNSlashDemo {
                 icon: 'pointy-sword-64.png',
             },
         }));
-        this._entityManager.Add(sword,'sword');
+        this._entityManager.Add(sword, 'sword');
 
-        const Raft = new entity.Entity();
-        Raft.AddComponent(new inventory_controller.InventoryItem({
-            type: 'weapon',
-            damage: 3,
-            renderParams: {
-                name: 'Raft',
-                scale: 0.25,
-                icon: 'pointy-Raft-64.png',
-            },
-        }));
-        this._entityManager.Add(Raft,'Raft');
+        // const Raft = new entity.Entity();
+        // Raft.AddComponent(new inventory_controller.InventoryItem({
+        //     type: 'weapon',
+        //     damage: 3,
+        //     renderParams: {
+        //         name: 'Raft',
+        //         scale: 0.25,
+        //         icon: 'pointy-Raft-64.png',
+        //     },
+        // }));
+        // this._entityManager.Add(Raft, 'Raft');
 
         const girl = new entity.Entity();
         girl.AddComponent(new gltf_component.AnimatedModelComponent({
@@ -415,7 +335,7 @@ class HackNSlashDemo {
         girl.AddComponent(new player_input.PickableComponent());
         girl.AddComponent(new quest_component.QuestComponent());
         girl.SetPosition(new THREE.Vector3(30, 0, 0));
-        this._entityManager.Add(girl,'girl');
+        this._entityManager.Add(girl, 'girl');
 
         const player = new entity.Entity();
         player.AddComponent(new player_input.BasicCharacterControllerInput(params));
@@ -451,17 +371,21 @@ class HackNSlashDemo {
             added: false,
         });
 
-        player.Broadcast({
-            topic: 'inventory.add',
-            value: Raft.Name,
-            added: false,
-        });
-
+        // //tool을 잡으면 인벤토리에 넣기
+        // player.Broadcast({
+        //     topic: 'inventory.add',
+        //     value: Raft.Name,
+        //     added: false,
+        // });
+        
         player.Broadcast({
             topic: 'inventory.equip',
             value: sword.Name,
             added: false,
+
         });
+        console.log("main player")
+        console.log(player)
         const camera = new entity.Entity();
         camera.AddComponent(
             new third_person_camera.ThirdPersonCamera({
@@ -469,7 +393,85 @@ class HackNSlashDemo {
                 target: this._entityManager.Get('player')
             }));
         this._entityManager.Add(camera, 'player-camera');
-        console.log(player)
+        for (let i = 0; i < 20; i++) {
+            const tool_Item = [
+                {
+                    resourceName: 'Raft.fbx'
+                },
+                {
+                    resourceName: 'Raft_Paddle.fbx'
+                },
+                {
+                    resourceName: 'Torch.fbx'
+                },
+                {
+                    resourceName: 'WaterBottle_3.fbx'
+                },
+                {
+                    resourceName: 'FlareGun.fbx'
+                },
+                {
+                    resourceName: 'Compass_Open.fbx'
+                },
+                {
+                    resourceName: 'Battery_Big.fbx'
+                },
+                {
+                    resourceName: 'Backpack.fbx'
+                },
+                {
+                    resourceName: 'FirstAidKit_Hard.fbx'
+                }
+
+            ];
+            let m = null;
+
+            // 무조건 한 번씩 나올 수 있도록 생성
+            if (i < 9) {
+                m = tool_Item[i];
+            }
+            // 한 번씩 출력된 이후에는 랜덤으로 추가 생성
+            else {
+                m = tool_Item[math.rand_int(0, tool_Item.length - 1)];
+            }
+            const tool = new entity.Entity();
+
+            const pos = new THREE.Vector3(
+                (Math.random() * 2.0 - 1.0) * 300,
+                1.5,
+                (Math.random() * 2.0 - 1.0) * 300);
+
+            tool.AddComponent(new gltf_component.StaticModelComponent({
+                scene: this._scene,
+                resourcePath: './resources/Survival_Pack/FBX/',
+                resourceName: m.resourceName,
+                scale: 0.05,
+                position: pos,
+                receiveShadow: true,
+                castShadow: true,
+            }));
+            tool.AddComponent(
+                new health_component.HealthComponent({
+                    health: 50,
+                    maxHealth: 50,
+                    strength: 2,
+                    wisdomness: 0,
+                    benchpress: 0,
+                    curl: 0,
+                    experience: 0,
+                    level: 1,
+                }));
+            tool.AddComponent(
+                new spatial_grid_controller.SpatialGridController({grid: this._grid}));
+            tool.AddComponent(new health_bar.HealthBar({
+                parent: this._scene,
+                camera: this._camera,
+            }));
+            tool.SetPosition(pos);
+            let entityName = m.resourceName;
+            this._entityManager.Add(tool, entityName);
+        }
+        console.log(this)
     }
 
     _OnWindowResize() {
@@ -499,6 +501,7 @@ class HackNSlashDemo {
 
             this._threejs.render(this._scene, this._camera);
             this._Step(t - this._previousRAF);
+            //console.log(this)
             this._previousRAF = t;
         });
     }
