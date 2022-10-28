@@ -58,7 +58,7 @@ class HackNSlashDemo {
         this._threejs.shadowMap.enabled = true;
         this._threejs.shadowMap.type = THREE.PCFSoftShadowMap;
         this._threejs.setPixelRatio(window.devicePixelRatio);
-        this._threejs.setSize(window.innerWidth, window.innerHeight);
+        this._threejs.setSize(window.innerWidth - 1, window.innerHeight - 5);
         this._threejs.domElement.id = 'threejs';
 
         document.getElementById('container').appendChild(this._threejs.domElement);
@@ -96,9 +96,7 @@ class HackNSlashDemo {
         this._sun = light;
 
         const textureLoader = new THREE.TextureLoader();
-        //const sand = textureLoader.load('./resources/folder_1_beach_island/textures/blinn4_baseColor.png')
         const sand = textureLoader.load('./resources/folder_1_beach_island/textures/SandCastleMaterial_baseColor.png')
-        const sea = textureLoader.load('./resources/folder_1_beach_island/textures/sea.jpg')
         const plane = new THREE.Mesh(
             new THREE.PlaneGeometry(1200, 1200, 0, 0),
             new THREE.MeshStandardMaterial({
@@ -121,7 +119,6 @@ class HackNSlashDemo {
         this._LoadClouds();
         this._LoadSky();
         this._LoadTool();
-
         this._previousRAF = null;
         this._RAF();
     }
@@ -148,8 +145,7 @@ class HackNSlashDemo {
             scene: this._scene,
             resourcePath: './resources/folder_1_beach_island/',
             resourceName: 'sea.gltf',
-            scale: //Math.random() * 5 + 10,
-                2.5,
+            scale: 2.5,
             position: pos,
         }));
         e2.SetPosition(pos);
@@ -162,8 +158,7 @@ class HackNSlashDemo {
             scene: this._scene,
             resourcePath: './resources/folder_1_beach_island/',
             resourceName: 'sea.gltf',
-            scale: //Math.random() * 5 + 10,
-                2.5,
+            scale: 2.5,
             position: pos,
         }));
         e3.SetPosition(pos);
@@ -176,8 +171,7 @@ class HackNSlashDemo {
             scene: this._scene,
             resourcePath: './resources/folder_1_beach_island/',
             resourceName: 'sea.gltf',
-            scale: //Math.random() * 5 + 10,
-                2.5,
+            scale: 2.5,
             position: pos,
         }));
         e4.SetPosition(pos);
@@ -309,21 +303,28 @@ class HackNSlashDemo {
                 }
 
             ];
-            const m = tool_Item[math.rand_int(0, tool_Item.length - 1)];
-
+            let m = null;
+            // 무조건 한 번씩 나올 수 있도록 생성
+            if (i < 9) {
+                m = tool_Item[i];
+            }
+            // 한 번씩 출력된 이후에는 랜덤으로 추가 생성
+            else {
+                m = tool_Item[math.rand_int(0, tool_Item.length - 1)];
+            }
             const tool = new entity.Entity();
 
             const pos = new THREE.Vector3(
-              (Math.random() * 2.0 - 1.0) * 300,
-              1,
-              (Math.random() * 2.0 - 1.0) * 300);
+                (Math.random() * 2.0 - 1.0) * 300,
+                1,
+                (Math.random() * 2.0 - 1.0) * 300);
 
             tool.AddComponent(new gltf_component.StaticModelComponent({
                 scene: this._scene,
                 resourcePath: './resources/Survival_Pack/FBX/',
                 resourceName: m.resourceName,
                 scale: 0.03,
-                poistion : pos,
+                position: pos,
                 receiveShadow: true,
                 castShadow: true,
             }));
@@ -386,6 +387,19 @@ class HackNSlashDemo {
         }));
         this._entityManager.Add(sword);
 
+        const Raft = new entity.Entity();
+        Raft.AddComponent(new inventory_controller.InventoryItem({
+            type: 'weapon',
+            damage: 3,
+            renderParams: {
+                name: 'Raft',
+                scale: 0.25,
+                icon: 'pointy-Raft-64.png',
+            },
+        }));
+        this._entityManager.Add(Raft);
+
+
         const girl = new entity.Entity();
         girl.AddComponent(new gltf_component.AnimatedModelComponent({
             scene: this._scene,
@@ -439,11 +453,16 @@ class HackNSlashDemo {
         });
 
         player.Broadcast({
+            topic: 'inventory.add',
+            value: Raft.Name,
+            added: false,
+        });
+
+        player.Broadcast({
             topic: 'inventory.equip',
             value: sword.Name,
             added: false,
         });
-
         const camera = new entity.Entity();
         camera.AddComponent(
             new third_person_camera.ThirdPersonCamera({
@@ -451,6 +470,7 @@ class HackNSlashDemo {
                 target: this._entityManager.Get('player')
             }));
         this._entityManager.Add(camera, 'player-camera');
+        console.log(player)
     }
 
     _OnWindowResize() {
