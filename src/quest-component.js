@@ -41,7 +41,7 @@ export const quest_component = (() => {
                 "\nRaft : " + 0 +
                 "\nPaddle : " + 0 +
                 "\nTorch : " + 1 +
-                "\nWaterBottle : " + 0 +
+                "\nWaterBottle : " + 2 +
                 "\nFlareGun : " + 0 +
                 "\nCompass : " + 0 +
                 "\nBattery : " + 0 +
