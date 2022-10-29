@@ -131,12 +131,12 @@ export const health_component = (() => {
                     break;
 
             }
-            console.log("this")
-            console.log(this)
-            console.log("this par")
-            console.log(this._parent)
-            console.log("this par par ")
-            console.log(this._parent._parent)
+            //console.log("this")
+            //console.log(this)
+            // console.log("this par")
+            // console.log(this._parent)
+            // console.log("this par par ")
+            // console.log(this._parent._parent)
 
             let Item = new entity.Entity();
             Item._name = ItemName
@@ -150,11 +150,11 @@ export const health_component = (() => {
                       icon: ItemIcon,
                   },
               }));
-            console.log("Item")
-            console.log(Item)
+            //console.log("Item")
+            //console.log(Item)
             Item._parent.Add(Item, ItemName);
-            console.log("Item _parent")
-            console.log(Item._parent)
+            //console.log("Item _parent")
+            //console.log(Item._parent)
             const player = Item._parent.Filter((entityItem = Item._parent._entities) =>entityItem._name == 'player')
             console.log("player")
             console.log(player)
