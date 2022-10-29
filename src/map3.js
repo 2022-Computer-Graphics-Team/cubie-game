@@ -307,18 +307,6 @@ class HackNSlashDemo {
         }));
         this._entityManager.Add(sword, 'sword');
 
-        // const Raft = new entity.Entity();
-        // Raft.AddComponent(new inventory_controller.InventoryItem({
-        //     type: 'weapon',
-        //     damage: 3,
-        //     renderParams: {
-        //         name: 'Raft',
-        //         scale: 0.25,
-        //         icon: 'pointy-Raft-64.png',
-        //     },
-        // }));
-        // this._entityManager.Add(Raft, 'Raft');
-
         const girl = new entity.Entity();
         girl.AddComponent(new gltf_component.AnimatedModelComponent({
             scene: this._scene,
@@ -371,13 +359,6 @@ class HackNSlashDemo {
             added: false,
         });
 
-        // //tool을 잡으면 인벤토리에 넣기
-        // player.Broadcast({
-        //     topic: 'inventory.add',
-        //     value: Raft.Name,
-        //     added: false,
-        // });
-        
         player.Broadcast({
             topic: 'inventory.equip',
             value: sword.Name,
