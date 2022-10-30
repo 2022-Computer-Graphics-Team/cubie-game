@@ -7,7 +7,12 @@ import {entity} from './entity.js';
 import {gltf_component} from './gltf-component.js';
 import {health_component} from './health-component.js';
 import {player_input} from './player-input.js';
+
 import {npc_entity} from './npc-entity.js';
+import {npc_key_entity} from './npc-key-entity.js';
+
+
+
 import {math} from './math.js';
 import {spatial_hash_grid} from './spatial-hash-grid.js';
 import {ui_controller} from './ui-controller.js';
@@ -117,7 +122,7 @@ class HackNSlashDemo {
     // this._LoadClouds();  //구름 지움
     // this._LoadSky();
 
-    //내 코드
+    //내 코드 - 중세 모델 올리기
     const e1 = new entity.Entity();
     var pos =  new THREE.Vector3(1900,0,100)
     e1.AddComponent(new gltf_component.StaticModelComponent({
@@ -286,15 +291,16 @@ class HackNSlashDemo {
     girl.AddComponent(new quest_component.QuestComponent());
     girl.SetPosition(new THREE.Vector3(30, 0, 0));
     this._entityManager.Add(girl);
-
-    // 보물상자 열쇠 (근데 적용 안 돼요 아직 ㅜㅜ)
+    
+    // 보물상자 열쇠
+    // 힌트로 여자를 찾으라고 하고 그 여자 가까이 있다고 하는 건 어떤지..
     const key = new entity.Entity();
-    key.AddComponent(new gltf_component.AnimatedModelComponent({
+    key.AddComponent(new gltf_component.StaticModelComponent({
         scene: this._scene,
-        resourcePath: './resources/key/source',
+        resourcePath: './resources/key/source/',
         resourceName: 'ancient_key.fbx',
-        resourceAnimation: 'Standing Idle.fbx',
-        scale: 35,
+        resourceTexture: '/resources/key/textures/key_normal.png', 
+        scale: 0.35,
         receiveShadow: true,
         castShadow: true,
     }));
@@ -303,10 +309,8 @@ class HackNSlashDemo {
     }));
     key.AddComponent(new player_input.PickableComponent());
     key.AddComponent(new quest_component.QuestComponent());
-    key.SetPosition(new THREE.Vector3(30, 5, 0));
+    key.SetPosition(new THREE.Vector3(35, 0, 0));
     this._entityManager.Add(key);
-
-    
 
     // 주인공
     const player = new entity.Entity();
@@ -357,6 +361,7 @@ class HackNSlashDemo {
             target: this._entityManager.Get('player')}));
     this._entityManager.Add(camera, 'player-camera');
 
+    // 몬스터
     for (let i = 0; i < 50; ++i) {
       const monsters = [
         {
@@ -386,7 +391,6 @@ class HackNSlashDemo {
       ];
       const m = monsters[math.rand_int(0, monsters.length - 1)];
 
-      // 몬스터
       const npc = new entity.Entity();
       npc.AddComponent(new npc_entity.NPCController({
           camera: this._camera,
@@ -394,6 +398,7 @@ class HackNSlashDemo {
           resourceName: m.resourceName,
           resourceTexture: m.resourceTexture,
       }));
+
       npc.AddComponent(
           new health_component.HealthComponent({
               health: 50,
@@ -407,20 +412,24 @@ class HackNSlashDemo {
               camera: this._camera,
               scene: this._scene,
           }));
+
       npc.AddComponent(
           new spatial_grid_controller.SpatialGridController({grid: this._grid}));
       npc.AddComponent(new health_bar.HealthBar({
           parent: this._scene,
           camera: this._camera,
       }));
+
       npc.AddComponent(new attack_controller.AttackController({timing: 0.35}));
       npc.SetPosition(new THREE.Vector3(
           (Math.random() * 2 - 1) * 500,
           0,
           (Math.random() * 2 - 1) * 500));
+
       // this._entityManager.Add(npc);  //몬스터 공격력 사라짐
-      
-    }
+
+
+    } // end of monster
   }
 
   _OnWindowResize() {
