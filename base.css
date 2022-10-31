@@ -235,3 +235,15 @@ body {
   margin: 2px;
   background-size: cover;
 }
+
+.quest-result {
+  border: black;
+  border-style: solid;
+  border-radius: 10%;
+  background-color: white;
+  width: 50px;
+  height: 50px;
+  margin: 2px;
+  background-size: cover;
+
+}

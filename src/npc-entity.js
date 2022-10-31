@@ -9,13 +9,16 @@ import {player_state} from './player-state.js';
 
 
 export const npc_entity = (() => {
-  
+  var countd =0;
+
   class AIInput {
+  
     constructor() {
       this._Init();    
     }
 
     _Init() {
+     
       this._keys = {
         forward: false,
         backward: false,
@@ -43,6 +46,7 @@ export const npc_entity = (() => {
   };
 
   class NPCController extends entity.Component {
+  
     constructor(params) {
       super();
       this._Init(params);
@@ -69,9 +73,13 @@ export const npc_entity = (() => {
       this._RegisterHandler('update.position', (m) => { this._OnPosition(m); });
     }
 
+  
     _OnDeath(msg) {
       this._stateMachine.SetState('death');
+      countd+=1;
+      console.log("deaddd..."+countd)
     }
+   
 
     _OnPosition(m) {
       if (this._target) {
@@ -201,8 +209,10 @@ export const npc_entity = (() => {
           currentState.Name != 'idle') {
         return;
       }
-
+     
       if (currentState.Name == 'death') {
+  
+        console.log("Dead...")
         return;
       }
 

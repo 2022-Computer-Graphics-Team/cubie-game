@@ -18,6 +18,7 @@ import {spatial_grid_controller} from './spatial-grid-controller.js';
 import {inventory_controller} from './inventory-controller.js';
 import {equip_weapon_component} from './equip-weapon-component.js';
 import {attack_controller} from './attacker-controller.js';
+import { player_state } from './player-state.js';
 
 
 const _VS = `
@@ -69,13 +70,13 @@ class HackNSlashDemo {
       this._OnWindowResize();
     }, false);
 
+
     const fov = 60;
     const aspect = 1920 / 1080;
     const near = 1.0;
     const far = 10000.0;
     this._camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    this._camera.position.set(25, 10, 25);
-
+    this._camera.position.set(26, 10, 25);
     this._scene = new THREE.Scene();
     this._scene.background = new THREE.Color(0xFFFFFF);
     this._scene.fog = new THREE.FogExp2(0x89b2eb, 0.002);
@@ -198,15 +199,15 @@ class HackNSlashDemo {
 
     const pos = new THREE.Vector3(
         (1 * 2.0 - 1.0) * 500-100,
-        0,
-        (1 * 2.0 - 1.0) * 500-100);
+        -6,
+        (1 * 2.0 - 1.0) * 500-130);
 
     const e = new entity.Entity();
     e.AddComponent(new gltf_component.StaticModelComponent({
       scene: this._scene,
       resourcePath: './resources/magic_portal/',
       resourceName: 'scene.gltf',
-      scale: 10,
+      scale: 14,
       emissive: new THREE.Color(0x000000),
       specular: new THREE.Color(0x000000),
       receiveShadow: true,
@@ -248,7 +249,8 @@ class HackNSlashDemo {
   }
 
   _LoadFoliage() {
-    for (let i = 0; i < 20; ++i) {
+    for (let i = 0; i < 30; ++i) {
+
       const names = [
           'CommonTree_Dead', 'CommonTree',
           'BirchTree', 'BirchTree_Dead',
@@ -263,6 +265,9 @@ class HackNSlashDemo {
           5,
           (Math.random() * 2.0 - 1.0) * 500-400);
 
+      if(pos.x >= (1 * 2.0 - 1.0) * 500-70 || pos.x <= (1 * 2.0 - 1.0) * 500-170  && pos.y !=0 && pos.z <= (1 * 2.0 - 1.0) * 500-100)
+      {
+  
       const e = new entity.Entity();
       e.AddComponent(new gltf_component.StaticModelComponent({
         scene: this._scene,
@@ -279,7 +284,9 @@ class HackNSlashDemo {
       e.SetPosition(pos);
       this._entityManager.Add(e);
       e.SetActive(false);
+      }
     }
+  
   }
 
   _LoadPlayer() {
@@ -377,6 +384,7 @@ class HackNSlashDemo {
         added: false,
     });
 
+
     const camera = new entity.Entity();
     camera.AddComponent(
         new third_person_camera.ThirdPersonCamera({
@@ -446,6 +454,8 @@ class HackNSlashDemo {
           (Math.random() * 2 - 1) * 500));
       this._entityManager.Add(npc);
     }
+
+
   }
 
   _OnWindowResize() {
@@ -493,4 +503,6 @@ let _APP = null;
 
 window.addEventListener('DOMContentLoaded', () => {
   _APP = new HackNSlashDemo();
+
+  
 });
