@@ -4,6 +4,8 @@ import {FBXLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm
 
 import {entity} from './entity.js';
 import {finite_state_machine} from './finite-state-machine.js';
+import { npc_entity } from './npc-entity.js';
+import { countd } from './npc-entity.js';
 import {player_state} from './player-state.js';
 
 
@@ -140,6 +142,13 @@ export const player_entity = (() => {
         if (d <= 4) {
           collisions.push(nearby[i].entity);
         }
+      }
+
+      if( (pos.x >= 350 && pos.x < 450) && (pos.z >= 368 && pos.z <=380) && (countd >= 10))
+      {
+        console.log("fuuukkk")
+        console.log("hey..."+countd);
+        window.location.replace('../Success.html')
       }
       return collisions;
     }

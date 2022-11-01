@@ -485,6 +485,7 @@ class HackNSlashDemo {
 
       this._threejs.render(this._scene, this._camera);
       this._Step(t - this._previousRAF);
+      //console.log(this)
       this._previousRAF = t;
     });
   }

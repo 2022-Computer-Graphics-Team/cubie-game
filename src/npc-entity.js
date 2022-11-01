@@ -6,16 +6,19 @@ import {finite_state_machine} from './finite-state-machine.js';
 import {entity} from './entity.js';
 import {player_entity} from './player-entity.js'
 import {player_state} from './player-state.js';
-
+var countd =0;
+export {countd};
 
 export const npc_entity = (() => {
-  var countd =0;
+ 
+  
 
   class AIInput {
   
     constructor() {
       this._Init();    
     }
+   
 
     _Init() {
      
