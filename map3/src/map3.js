@@ -401,9 +401,8 @@ class HackNSlashDemo {
                 target: this._entityManager.Get('player')
             }));
 
-        this._entityManager.Add(camera, 'player-camera');
-
         document.addEventListener("keydown", keyDown, false);
+        this._entityManager.Add(camera, 'player-camera');
 
         // function keyDown(event) {
         //     if (flag === 0 && event.keyCode === 70) {
@@ -420,7 +419,6 @@ class HackNSlashDemo {
         function keyDown(event) {
 
             if (event.keyCode === 49) {
-
                 camera.AddComponent(
                     new first_person_camera.FirstPersonCamera({
                         camera: object._camera,
@@ -429,7 +427,6 @@ class HackNSlashDemo {
             }
 
             if (event.keyCode === 50) {
-
                 camera.AddComponent(
                     new third_person_camera.ThirdPersonCamera({
                         camera: object._camera,
