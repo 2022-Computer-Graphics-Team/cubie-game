@@ -17,6 +17,8 @@ import {player_input} from '../../src/player-input.js';
 import {equip_weapon_component} from './map3-equip-weapon-component.js';
 import {attack_controller} from '../../src/attacker-controller.js';
 import {inventory_controller} from '../../src/inventory-controller.js';
+import {quest_component} from './map3-mission-component.js';
+
 
 import {gltf_component} from '../../src/gltf-component.js';
 
@@ -349,6 +351,26 @@ class HackNSlashDemo {
         }));
         this._entityManager.Add(levelUpSpawner, 'level-up-spawner');
 
+        /* NPC : 여자 */
+
+        const girl = new entity.Entity();
+        girl.AddComponent(new gltf_component.AnimatedModelComponent({
+            scene: this._scene,
+            resourcePath: './resources/girl/',
+            resourceName: 'peasant_girl.fbx',
+            resourceAnimation: 'Standing Idle.fbx',
+            scale: 0.035,
+            receiveShadow: true,
+            castShadow: true,
+        }));
+        girl.AddComponent(new spatial_grid_controller.SpatialGridController({
+            grid: this._grid,
+        }));
+        girl.AddComponent(new player_input.PickableComponent());
+        girl.AddComponent(new quest_component.QuestComponent());
+        girl.SetPosition(new THREE.Vector3(30, 0, 0));
+        this._entityManager.Add(girl, 'girl');
+
         /* 무기: 검 */
 
         const sword = new entity.Entity();
@@ -569,10 +591,10 @@ class HackNSlashDemo {
             }
 
             this._RAF();
-
             this._threejs.render(this._scene, this._camera);
             this._Step(t - this._previousRAF);
             this._previousRAF = t;
+
         });
     }
 
