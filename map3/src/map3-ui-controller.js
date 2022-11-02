@@ -69,10 +69,6 @@ export const ui_controller = (() => {
         }
 
         _CheckComplete() {
-            console.log("this")
-            console.log(this)
-            console.log("quest")
-            console.log(this._quests)
 
             var countItem = [];
             for (let i = 0; i < 9; i++)
@@ -97,8 +93,6 @@ export const ui_controller = (() => {
                                     if (Backpack == this._quests.foo.Backpack) {
                                         if (FirstAidKit == this._quests.foo.FirstAidKit_Hard) {
                                             if (Torch == this._quests.foo.Torch) {
-                                                console.log("Torch");
-                                                console.log(Torch.length);
                                                 window.location.replace('../Success.html')
                                             }
                                         }

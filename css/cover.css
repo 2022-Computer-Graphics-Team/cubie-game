@@ -14,9 +14,11 @@ body {
 
     text-align: center;
     font-family: 'Ubuntu', sans-serif;
+
+    overflow: hidden;
 }
 
-/* map2_backup.html */
+/* map2.html */
 
 .title {
     margin-top: 200px;
@@ -95,8 +97,24 @@ body {
     height: 100%;
 }
 
+.health-ui .background-bar {
+    width: 960px;
+    height: 20px;
+
+    background: black;
+
+    position: absolute;
+    top: 90%;
+    left: 25%;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    border-radius: 5px;
+}
+
 .health-ui .health-bar {
-    width: 50%;
+    width: 960px;
     height: 20px;
 
     background: red;
@@ -188,4 +206,83 @@ body {
     font-size: 2em;
     color: white;
     border: thick solid black;
+}
+
+/* 로딩 */
+.loading {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background: black;
+}
+
+.loading .middle {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+.loading .bar {
+    width: 10px;
+    height: 70px;
+    background: black;
+    display: inline-block;
+    transform-origin: bottom center;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    /* box-shadow:5px 10px 20px inset rgba(255,23,25.2); */
+    /* 원래는 1.2s linear inifinite; */
+    animation: loader 1.5s linear infinite;
+}
+
+.loading .bar1 {
+    animation-delay: 0.1s;
+}
+
+.loading .bar2 {
+    animation-delay: 0.2s;
+}
+
+.loading .bar3 {
+    animation-delay: 0.3s;
+}
+
+.loading .bar4 {
+    animation-delay: 0.4s;
+}
+
+.loading .bar5 {
+    animation-delay: 0.5s;
+}
+
+.loading .bar6 {
+    animation-delay: 0.6s;
+}
+
+.loading .bar7 {
+    animation-delay: 0.7s;
+}
+
+.loading .bar8 {
+    animation-delay: 0.8s;
+}
+
+@keyframes loader {
+    0% {
+        transform: scaleY(0.1);
+        background: transparent;
+    }
+    50% {
+        transform: scaleY(1);
+        background: yellowgreen;
+    }
+    100% {
+        transform: scaleY(0.1);
+        background: transparent;
+    }
 }

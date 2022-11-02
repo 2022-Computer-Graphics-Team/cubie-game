@@ -29,8 +29,6 @@ export const equip_weapon_component = (() => {
 
         _AttachTarget() {
             if (this._bones && this._target) {
-                console.log('Type of this._bones: ' + typeof(this._bones))
-                console.log('this._target: ' + this._target)
 
                 // CHECK: 기존에 잘 되던 코드가 갑자기 안 됨. (add method)
                 // this._bones[this._params.anchor].add(this._target);

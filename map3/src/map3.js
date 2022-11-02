@@ -3,27 +3,23 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118.1/build/three.m
 import {third_person_camera} from '../../src/third-person-camera.js';
 import {first_person_camera} from '../../src/first-person-camera.js';
 
-import {math} from '../../src/math.js';
-
-import {entity} from '../../src/entity.js';
-import {player_entity} from './map3-player-entity.js'
-import {entity_manager} from '../../src/entity-manager.js';
-
-import {ui_controller} from './map3-ui-controller.js';
-import {health_component} from './map3-object-hp.js';
-import {health_bar} from '../../src/health-bar.js';
-
-import {player_input} from '../../src/player-input.js';
-import {equip_weapon_component} from './map3-equip-weapon-component.js';
 import {attack_controller} from '../../src/attacker-controller.js';
-import {inventory_controller} from '../../src/inventory-controller.js';
-
+import {entity} from '../../src/entity.js';
+import {entity_manager} from '../../src/entity-manager.js';
 import {gltf_component} from '../../src/gltf-component.js';
-
-import {spatial_hash_grid} from '../../src/spatial-hash-grid.js';
-import {spatial_grid_controller} from '../../src/spatial-grid-controller.js';
-
+import {health_bar} from '../../src/health-bar.js';
+import {inventory_controller} from '../../src/inventory-controller.js';
+import {math} from '../../src/math.js';
 import {level_up_component} from '../../src/particle-effect.js';
+import {player_input} from '../../src/player-input.js';
+import {spatial_grid_controller} from '../../src/spatial-grid-controller.js';
+import {spatial_hash_grid} from '../../src/spatial-hash-grid.js';
+
+import {equip_weapon_component} from './map3-equip-weapon-component.js';
+import {health_component} from './map3-object-hp.js';
+import {player_entity} from './map3-player-entity.js'
+import {ui_controller} from './map3-ui-controller.js';
+
 
 const _VS = `
 varying vec3 vWorldPosition;
@@ -151,6 +147,7 @@ class HackNSlashDemo {
 
     /**
      * 맵: 바다
+     * CHECK: 여기에 resourcePath 부분 제대로 동작하는지 확인하기
      */
     _LoadSea() {
         const e = new entity.Entity();
@@ -289,7 +286,7 @@ class HackNSlashDemo {
             const e = new entity.Entity();
             e.AddComponent(new gltf_component.StaticModelComponent({
                 scene       : this._scene,
-                resourcePath: './resources/nature2/GLTF/',
+                resourcePath: './resources/nature/GLTF/',
                 resourceName: 'Cloud' + index + '.glb',
                 position    : pos,
                 scale       : Math.random() * 5 + 10,
@@ -468,6 +465,7 @@ class HackNSlashDemo {
                 }
 
             ];
+
             let m = null;
 
             // 무조건 한 번씩 나올 수 있도록 생성
@@ -515,7 +513,6 @@ class HackNSlashDemo {
             let entityName = m.resourceName;
             this._entityManager.Add(tool, entityName);
         }
-        console.log(this)
     }
 
     _OnWindowResize() {

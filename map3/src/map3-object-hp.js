@@ -1,6 +1,7 @@
 import {entity} from "../../src/entity.js";
 import {inventory_controller} from '../../src/inventory-controller.js';
 
+
 /**
  * map3
  */
@@ -34,7 +35,7 @@ export const health_component = (() => {
 
             const healthAsPercentage = this._health / this._maxHealth;
 
-            // CHANGED: HP 바의 width 제한두지 않고 그냥 고정적인 하드 코딩으로 만듦.
+            // CHANGED: HP바의 width 제한두지 않고 그냥 고정적인 하드 코딩으로 만듦.
             // bar.style.width = Math.floor(200 * healthAsPercentage) + 'px';
 
             // document.getElementById('stats-strength').innerText = this._params.strength;
@@ -46,7 +47,6 @@ export const health_component = (() => {
 
         _ComputeLevelXPRequirement() {
             const level = this._params.level;
-            // Blah just something easy
             const xpRequired = Math.round(2 ** (level - 1) * 100);
             return xpRequired;
         }
@@ -161,8 +161,6 @@ export const health_component = (() => {
             // console.log("Item _parent")
             // console.log(Item._parent)
             const player = Item._parent.Filter((entityItem = Item._parent._entities) =>entityItem._name == 'player')
-            console.log("player")
-            console.log(player)
             player[0].Broadcast({
                 topic: 'inventory.add',
                 value: ItemName,
