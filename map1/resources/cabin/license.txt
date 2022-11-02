@@ -1,0 +1,11 @@
+Model Information:
+* title:	Cabin
+* source:	https://sketchfab.com/3d-models/cabin-1f6614552be14718828f9190b7824d48
+* author:	BaptisteBerard (https://sketchfab.com/BaptisteBerard)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Cabin" (https://sketchfab.com/3d-models/cabin-1f6614552be14718828f9190b7824d48) by BaptisteBerard (https://sketchfab.com/BaptisteBerard) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
