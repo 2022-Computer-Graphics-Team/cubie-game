@@ -90,58 +90,52 @@ export const health_component = (() => {
             let ItemName;
             let ItemIcon;
             switch (this._parent._name) {
-                case 'Raft.fbx' :
-                    ItemName = 'Raft'
-                    ItemIcon = 'pointy-Raft-64.png'
+                case 'Radio.fbx' :
+                    ItemName = 'Radio'
+                    ItemIcon = 'radio.png'
                     break;
 
                 case 'Raft_Paddle.fbx' :
                     ItemName = 'Paddle'
-                    ItemIcon = 'pointy-Raft_Paddle-64.png'
+                    ItemIcon = 'Paddle.png'
                     break;
 
                 case 'Torch.fbx' :
                     ItemName = 'Torch'
-                    ItemIcon = 'pointy-Torch-64.png'
+                    ItemIcon = 'flashlight.png'
                     break;
 
                 case 'WaterBottle_3.fbx' :
                     ItemName = 'WaterBottle_3'
-                    ItemIcon = 'pointy-WaterBottle_3-64.png'
+                    ItemIcon = 'waterbottle.png'
                     break;
 
                 case 'FlareGun.fbx' :
                     ItemName = 'FlareGun'
-                    ItemIcon = 'pointy-FlareGun-64.png'
+                    ItemIcon = 'gun.png'
                     break;
 
                 case 'Compass_Open.fbx' :
                     ItemName = 'Compass_Open'
-                    ItemIcon = 'pointy-Compass_Open-64.png'
+                    ItemIcon = 'compass.png'
                     break;
 
                 case 'Battery_Big.fbx' :
                     ItemName = 'Battery_Big'
-                    ItemIcon = 'pointy-Battery_Big-64.png'
+                    ItemIcon = 'battery.png'
                     break;
 
                 case 'Backpack.fbx' :
                     ItemName = 'Backpack'
-                    ItemIcon = 'pointy-Backpack_tool-64.png'
+                    ItemIcon = 'bag.png'
                     break;
 
                 case 'FirstAidKit_Hard.fbx' :
                     ItemName = 'FirstAidKit_Hard'
-                    ItemIcon = 'pointy-FirstAidKit_Hard-64.png'
+                    ItemIcon = 'healthbox.png'
                     break;
 
             }
-            // console.log("this")
-            // console.log(this)
-            // console.log("this par")
-            // console.log(this._parent)
-            // console.log("this par par ")
-            // console.log(this._parent._parent)
 
             let Item = new entity.Entity();
             Item._name = ItemName
@@ -155,11 +149,8 @@ export const health_component = (() => {
                       icon: ItemIcon,
                   },
               }));
-            // console.log("Item")
-            // console.log(Item)
             Item._parent.Add(Item, ItemName);
-            // console.log("Item _parent")
-            // console.log(Item._parent)
+
             const player = Item._parent.Filter((entityItem = Item._parent._entities) =>entityItem._name == 'player')
             console.log("player")
             console.log(player)

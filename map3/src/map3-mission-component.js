@@ -35,7 +35,7 @@ export const quest_component = (() => {
             Test Usage
              */
             var _TEXT = 'We need the following items Hurry up and save me!\n' +
-                "\nRaft : " + 0 +
+                "\nRadio : " + 0 +
                 "\nPaddle : " + 0 +
                 "\nTorch : " + 1 +
                 "\nWaterBottle : " + 2 +
@@ -61,7 +61,7 @@ export const quest_component = (() => {
                 // FirstAidKit_Hard: randomNeedItem[8],
 
                 // Test Usage
-                Raft: 0,
+                Radio: 0,
                 Paddle: 0,
                 Torch: 1,
                 WaterBottle_3: 2,

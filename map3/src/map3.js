@@ -136,6 +136,7 @@ class HackNSlashDemo {
         this._LoadPlayer();
         this._LoadClouds();
         this._LoadSky();
+        this._LoadPortal();
         this._previousRAF = null;
         this._RAF();
     }
@@ -156,11 +157,11 @@ class HackNSlashDemo {
         const e = new entity.Entity();
         var pos = new THREE.Vector3(1500, 50, 0)
         e.AddComponent(new gltf_component.StaticModelComponent({
-            scene       : this._scene,
+            scene: this._scene,
             resourcePath: './resources/beach/',
             resourceName: 'sea.gltf',
-            scale       : 2.5,
-            position    : pos,
+            scale: 2.5,
+            position: pos,
         }));
         e.SetPosition(pos);
         this._entityManager.Add(e, 'sea1');
@@ -169,11 +170,11 @@ class HackNSlashDemo {
         const e2 = new entity.Entity();
         var pos = new THREE.Vector3(-1500, 50, 0)
         e2.AddComponent(new gltf_component.StaticModelComponent({
-            scene       : this._scene,
+            scene: this._scene,
             resourcePath: './resources/beach/',
             resourceName: 'sea.gltf',
-            scale       : 2.5,
-            position    : pos,
+            scale: 2.5,
+            position: pos,
         }));
         e2.SetPosition(pos);
         this._entityManager.Add(e2, 'sea2');
@@ -182,11 +183,11 @@ class HackNSlashDemo {
         const e3 = new entity.Entity();
         var pos = new THREE.Vector3(0, 30, 850)
         e3.AddComponent(new gltf_component.StaticModelComponent({
-            scene       : this._scene,
+            scene: this._scene,
             resourcePath: './resources/beach/',
             resourceName: 'sea.gltf',
-            scale       : 2.5,
-            position    : pos,
+            scale: 2.5,
+            position: pos,
         }));
         e3.SetPosition(pos);
         this._entityManager.Add(e3, 'sea3');
@@ -195,11 +196,11 @@ class HackNSlashDemo {
         const e4 = new entity.Entity();
         var pos = new THREE.Vector3(0, 30, -850)
         e4.AddComponent(new gltf_component.StaticModelComponent({
-            scene       : this._scene,
+            scene: this._scene,
             resourcePath: './resources/beach/',
             resourceName: 'sea.gltf',
-            scale       : 2.5,
-            position    : pos,
+            scale: 2.5,
+            position: pos,
         }));
         e4.SetPosition(pos);
         this._entityManager.Add(e4, 'sea4');
@@ -210,7 +211,7 @@ class HackNSlashDemo {
      * 맵: 자연 구조물
      */
     _LoadFoliage() {
-        for (let i = 0; i < 150; ++i) {
+        for (let i = 0; i < 200; ++i) {
             const names = [
                 'CommonTree_Dead', 'CommonTree',
                 'BirchTree', 'BirchTree_Dead',
@@ -227,14 +228,14 @@ class HackNSlashDemo {
 
             const e = new entity.Entity();
             e.AddComponent(new gltf_component.StaticModelComponent({
-                scene        : this._scene,
-                resourcePath : './resources/nature/FBX/',
-                resourceName : name + '_' + index + '.fbx',
-                scale        : 0.25,
-                emissive     : new THREE.Color(0x000000),
-                specular     : new THREE.Color(0x000000),
+                scene: this._scene,
+                resourcePath: './resources/nature/FBX/',
+                resourceName: name + '_' + index + '.fbx',
+                scale: 0.25,
+                emissive: new THREE.Color(0x000000),
+                specular: new THREE.Color(0x000000),
                 receiveShadow: true,
-                castShadow   : true,
+                castShadow: true,
             }));
             e.AddComponent(
                 new spatial_grid_controller.SpatialGridController({grid: this._grid}));
@@ -254,10 +255,10 @@ class HackNSlashDemo {
         this._scene.add(hemiLight);
 
         const uniforms = {
-            "topColor"   : {value: new THREE.Color(0x0077ff)},
+            "topColor": {value: new THREE.Color(0x0077ff)},
             "bottomColor": {value: new THREE.Color(0xffffff)},
-            "offset"     : {value: 33},
-            "exponent"   : {value: 0.6}
+            "offset": {value: 33},
+            "exponent": {value: 0.6}
         };
         uniforms["topColor"].value.copy(hemiLight.color);
 
@@ -265,10 +266,10 @@ class HackNSlashDemo {
 
         const skyGeo = new THREE.SphereBufferGeometry(1000, 32, 15);
         const skyMat = new THREE.ShaderMaterial({
-            uniforms      : uniforms,
-            vertexShader  : _VS,
+            uniforms: uniforms,
+            vertexShader: _VS,
             fragmentShader: _FS,
-            side          : THREE.BackSide
+            side: THREE.BackSide
         });
 
         const sky = new THREE.Mesh(skyGeo, skyMat);
@@ -288,17 +289,44 @@ class HackNSlashDemo {
 
             const e = new entity.Entity();
             e.AddComponent(new gltf_component.StaticModelComponent({
-                scene       : this._scene,
+                scene: this._scene,
                 resourcePath: './resources/nature2/GLTF/',
                 resourceName: 'Cloud' + index + '.glb',
-                position    : pos,
-                scale       : Math.random() * 5 + 10,
-                emissive    : new THREE.Color(0x808080),
+                position: pos,
+                scale: Math.random() * 5 + 10,
+                emissive: new THREE.Color(0x808080),
             }));
             e.SetPosition(pos);
             this._entityManager.Add(e, 'cloud');
             e.SetActive(false);
         }
+    }
+    /**
+     * 맵: 포털
+     */
+    _LoadPortal() {
+        const pos = new THREE.Vector3(
+            (Math.random() * 2.0 - 1.0) * 500,
+            0,
+            (Math.random() * 2.0 - 1.0) * 500);
+
+        const e = new entity.Entity();
+        e.AddComponent(new gltf_component.StaticModelComponent({
+            scene: this._scene,
+            resourcePath: './resources/magic_portal/',
+            resourceName: 'scene.gltf',
+            scale: 14,
+            emissive: new THREE.Color(0x000000),
+            specular: new THREE.Color(0x000000),
+            receiveShadow: true,
+            castShadow: true,
+        }));
+        e.AddComponent(
+            new spatial_grid_controller.SpatialGridController({grid: this._grid}));
+        e.SetPosition(pos);
+        this._entityManager.Add(e);
+        e.SetActive(false);
+
     }
 
     /**
@@ -309,7 +337,7 @@ class HackNSlashDemo {
 
         const params = {
             camera: this._camera,
-            scene : this._scene,
+            scene: this._scene,
         };
 
         /* 레벨업 효과 파티클 */
@@ -317,7 +345,7 @@ class HackNSlashDemo {
         const levelUpSpawner = new entity.Entity();
         levelUpSpawner.AddComponent(new level_up_component.LevelUpComponentSpawner({
             camera: this._camera,
-            scene : this._scene,
+            scene: this._scene,
         }));
         this._entityManager.Add(levelUpSpawner, 'level-up-spawner');
 
@@ -325,26 +353,25 @@ class HackNSlashDemo {
 
         const sword = new entity.Entity();
         sword.AddComponent(new inventory_controller.InventoryItem({
-            type        : 'weapon',
-            damage      : 3,
+            type: 'weapon',
+            damage: 3,
             renderParams: {
-                name : 'Sword',
+                name: 'Sword',
                 scale: 0.25,
-                icon : 'pointy-sword-64.png',
+                icon: 'pointy-sword-64.png',
             },
         }));
         this._entityManager.Add(sword, 'sword');
 
         /* 무기: 도끼 */
-
         const axe = new entity.Entity();
         axe.AddComponent(new inventory_controller.InventoryItem({
-            type        : 'weapon',
-            damage      : 3,
+            type: 'weapon',
+            damage: 3,
             renderParams: {
-                name : 'Axe_Small',
+                name: 'Axe_Small',
                 scale: 0.25,
-                icon : 'war-axe-64.png',
+                icon: 'war-axe-64.png',
             },
         }));
         this._entityManager.Add(axe, 'axe');
@@ -358,15 +385,15 @@ class HackNSlashDemo {
             new equip_weapon_component.EquipWeapon({anchor: 'RightHandIndex1'}));
         player.AddComponent(new inventory_controller.InventoryController(params));
         player.AddComponent(new health_component.HealthComponent({
-            updateUI  : true,
-            health    : 100,
-            maxHealth : 100,
-            strength  : 50,
+            updateUI: true,
+            health: 100,
+            maxHealth: 100,
+            strength: 50,
             wisdomness: 5,
             benchpress: 20,
-            curl      : 100,
+            curl: 100,
             experience: 0,
-            level     : 1,
+            level: 1,
         }));
         player.AddComponent(
             new spatial_grid_controller.SpatialGridController({grid: this._grid}));
@@ -440,7 +467,7 @@ class HackNSlashDemo {
         for (let i = 0; i < 20; i++) {
             const tool_Item = [
                 {
-                    resourceName: 'Raft.fbx'
+                    resourceName: 'Radio.fbx'
                 },
                 {
                     resourceName: 'Raft_Paddle.fbx'
@@ -486,24 +513,24 @@ class HackNSlashDemo {
                 (Math.random() * 2.0 - 1.0) * 300);
 
             tool.AddComponent(new gltf_component.StaticModelComponent({
-                scene        : this._scene,
-                resourcePath : './resources/survival-pack/FBX/',
-                resourceName : m.resourceName,
-                scale        : 0.05,
-                position     : pos,
+                scene: this._scene,
+                resourcePath: './resources/survival-pack/FBX/',
+                resourceName: m.resourceName,
+                scale: 0.05,
+                position: pos,
                 receiveShadow: true,
-                castShadow   : true,
+                castShadow: true,
             }));
             tool.AddComponent(
                 new health_component.HealthComponent({
-                    health    : 50,
-                    maxHealth : 50,
-                    strength  : 2,
+                    health: 50,
+                    maxHealth: 50,
+                    strength: 2,
                     wisdomness: 0,
                     benchpress: 0,
-                    curl      : 0,
+                    curl: 0,
                     experience: 0,
-                    level     : 1,
+                    level: 1,
                 }));
             tool.AddComponent(
                 new spatial_grid_controller.SpatialGridController({grid: this._grid}));

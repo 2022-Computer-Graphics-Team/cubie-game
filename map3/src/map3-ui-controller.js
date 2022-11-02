@@ -77,7 +77,7 @@ export const ui_controller = (() => {
             var countItem = [];
             for (let i = 0; i < 9; i++)
                 countItem[i] = 0;
-            var Raft = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'Raft').length
+            var Radio = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'Radio').length
             var Paddle = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'Paddle').length
             var Torch = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'Torch').length
             var WaterBottle = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'WaterBottle_3').length
@@ -88,7 +88,7 @@ export const ui_controller = (() => {
             var FirstAidKit = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'FirstAidKit_Hard').length
 
 
-            if (Raft == this._quests.foo.Raft) {
+            if (Radio == this._quests.foo.Radio) {
                 if (Paddle == this._quests.foo.Paddle) {
                     if (WaterBottle == this._quests.foo.WaterBottle_3) {
                         if (FlareGun == this._quests.foo.FlareGun) {
@@ -97,8 +97,6 @@ export const ui_controller = (() => {
                                     if (Backpack == this._quests.foo.Backpack) {
                                         if (FirstAidKit == this._quests.foo.FirstAidKit_Hard) {
                                             if (Torch == this._quests.foo.Torch) {
-                                                console.log("Torch");
-                                                console.log(Torch.length);
                                                 window.location.replace('../Success.html')
                                             }
                                         }
