@@ -18,7 +18,7 @@ import {spatial_hash_grid} from '../../src/spatial-hash-grid.js';
 import {equip_weapon_component} from './map1-equip-weapon-component.js';
 import {npc_entity} from './map1-npc-entity.js';
 import {health_component} from './map1-object-hp.js';
-import {player_entity} from './map1-player-entity.js'
+import {player_entity} from './map1-player-entity.js';
 import {ui_controller} from './map1-ui-controller.js';
 
 
@@ -53,6 +53,7 @@ class Map1 {
     }
 
     _Initialize() {
+        // 로딩바만을 보여주기 위해 나머지 레이아웃을 숨긴다.
         document.getElementById('ui').style.visibility = 'hidden';
         document.getElementById('ui').style.display = 'none';
 
@@ -135,8 +136,6 @@ class Map1 {
         this._LoadPortal();
         this._LoadPlayer();
 
-        // CHECK: 필요없는 부분인지, 필요한 부분인지 체크하기
-        // CHECK: resourcePath 부분 제대로 동작하는지 확인하기
         const e1 = new entity.Entity();
         var pos = new THREE.Vector3(2000, 100, 100)
         e1.AddComponent(new gltf_component.StaticModelComponent({
@@ -481,6 +480,7 @@ class Map1 {
                 resourceName   : m.resourceName,
                 resourceTexture: m.resourceTexture,
             }));
+
             npc.AddComponent(
                 new health_component.HealthComponent({
                     health    : 50,
@@ -494,6 +494,7 @@ class Map1 {
                     camera    : this._camera,
                     scene     : this._scene,
                 }));
+
             npc.AddComponent(
                 new spatial_grid_controller.SpatialGridController({grid: this._grid}));
             npc.AddComponent(new health_bar.HealthBar({

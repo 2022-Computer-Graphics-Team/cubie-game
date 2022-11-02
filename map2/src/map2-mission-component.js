@@ -1,6 +1,7 @@
-import {entity} from "./entity.js";
+import {entity} from "../../src/entity.js";
 
 
+// CHECK: 이 부분 필요한지 확인 필요
 export const quest_component = (() => {
 
   const _TITLE = 'Welcome Adventurer!';
@@ -10,8 +11,8 @@ export const quest_component = (() => {
     constructor() {
       super();
 
-      const e = document.getElementById('quest-ui');
-      e.style.visibility = 'hidden';
+      // const e = document.getElementById('quest-ui');
+      // e.style.visibility = 'hidden';
     }
 
     InitComponent() {
@@ -19,7 +20,6 @@ export const quest_component = (() => {
     }
 
     _OnPicked(msg) {
-      // HARDCODE A QUEST
       const quest = {
         id: 'foo',
         title: _TITLE,
@@ -32,9 +32,10 @@ export const quest_component = (() => {
       const ui = this.FindEntity('ui').GetComponent('UIController');
       ui.AddQuest(quest);
     }
-  };
+  }
 
   return {
       QuestComponent: QuestComponent,
   };
+
 })();

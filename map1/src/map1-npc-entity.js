@@ -1,8 +1,8 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118/build/three.module.js';
 import {FBXLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/FBXLoader.js';
 
-import {finite_state_machine} from '../../src/finite-state-machine.js';
 import {entity} from '../../src/entity.js';
+import {finite_state_machine} from '../../src/finite-state-machine.js';
 import {player_state} from '../../src/player-state.js';
 
 import {player_entity} from './map1-player-entity.js'
@@ -178,7 +178,6 @@ export const npc_entity = (() => {
                 const e = nearby[i].entity;
                 const d = ((pos.x - e._position.x) ** 2 + (pos.z - e._position.z) ** 2) ** 0.5;
 
-                // HARDCODED
                 if (d <= 4) {
                     collisions.push(nearby[i].entity);
                 }
