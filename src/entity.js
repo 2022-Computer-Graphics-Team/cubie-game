@@ -39,7 +39,6 @@ export const entity = (() => {
 
         AddComponent(c) {
             c.SetParent(this);
-
             this._components[c.constructor.name] = c;
 
             c.InitComponent();
