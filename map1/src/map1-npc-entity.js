@@ -109,6 +109,8 @@ export const npc_entity = (() => {
                 this._target.scale.setScalar(0.025);
                 this._target.position.copy(this._parent._position);
                 this._target.position.y += 0.35;
+
+                /*
                 const texLoader = new THREE.TextureLoader();
                 const texture = texLoader.load(
                     '../../resources/monsters1/Textures/' + this._params.resourceTexture);
@@ -123,6 +125,7 @@ export const npc_entity = (() => {
                         c.material.side = THREE.DoubleSide;
                     }
                 });
+               */
 
                 this._mixer = new THREE.AnimationMixer(this._target);
 
