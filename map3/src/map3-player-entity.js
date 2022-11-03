@@ -1,5 +1,4 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118.1/build/three.module.js';
-
 import {FBXLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/FBXLoader.js';
 
 import {entity} from '../../src/entity.js';
@@ -35,7 +34,6 @@ export const player_entity = (() => {
             return this._animations;
         }
     }
-
 
     class BasicCharacterController extends entity.Component {
         constructor(params) {
@@ -131,6 +129,8 @@ export const player_entity = (() => {
                 loader.load('Sword And Shield Death.fbx', (a) => {
                     _OnLoad('death', a);
                 });
+
+                // FIXME: 추가할지 말지 고민하고 수정하기
                 loader.load('Sword And Shield Jump.fbx', (a) => {
                     _OnLoad('jump', a);
                 })
@@ -258,7 +258,7 @@ export const player_entity = (() => {
             this._parent.SetPosition(this._position);
             this._parent.SetQuaternion(this._target.quaternion);
         }
-    };
+    }
 
     return {
         BasicCharacterControllerProxy: BasicCharacterControllerProxy,

@@ -1,4 +1,4 @@
-import {entity} from '../../src/entity.js';
+import {entity} from '../../src-backup/entity.js';
 
 import {FBXLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/FBXLoader.js';
 
@@ -29,8 +29,6 @@ export const equip_weapon_component = (() => {
 
         _AttachTarget() {
             if (this._bones && this._target) {
-                console.log('Type of this._bones: ' + typeof(this._bones))
-                console.log('this._target: ' + this._target)
 
                 // CHECK: 기존에 잘 되던 코드가 갑자기 안 됨.
                 // this._bones[this._params.anchor].add(this._target);
