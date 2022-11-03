@@ -101,7 +101,7 @@ export const npc_entity = (() => {
             const loader = new FBXLoader();
 
             // CHECK: resources/monster
-            loader.setPath('../../resources/Zombie/');
+            loader.setPath('../../resources/zombie/');
             loader.load(this._params.resourceName, (glb) => {
                 this._target = glb;
                 this._params.scene.add(this._target);

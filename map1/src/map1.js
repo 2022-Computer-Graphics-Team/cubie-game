@@ -446,19 +446,19 @@ class Map1 {
             const monsters = [
                 {
                     resourceName   : 'Zombie_Male.fbx',
-                    resourcePath: './resources/Zombie/',
+                    resourcePath: './resources/zombie/',
                 },
                 {
                     resourceName   : 'Zombie_Female.fbx',
-                    resourcePath: './resources/Zombie/',
+                    resourcePath: './resources/zombie/',
                 },
                 {
                     resourceName   : 'Goblin_Female.fbx',
-                    resourcePath: './resources/Zombie/',
+                    resourcePath: './resources/zombie/',
                 },
                 {
                     resourceName   : 'Goblin_Male.fbx',
-                    resourcePath: './resources/Zombie/',
+                    resourcePath: './resources/zombie/',
                 },
            
             ];
