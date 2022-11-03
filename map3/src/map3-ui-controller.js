@@ -1,8 +1,5 @@
 import {entity} from '../../src/entity.js';
 
-var flag = false;
-export {flag};
-
 export const ui_controller = (() => {
 
     class UIController extends entity.Component {
@@ -54,13 +51,6 @@ export const ui_controller = (() => {
 
             const title = document.getElementById('mission-title');
             title.innerText = quest.title;
-
-            //this._CheckComplete()
-        }
-
-        _CheckComplete() {
-
-
 
         }
 
