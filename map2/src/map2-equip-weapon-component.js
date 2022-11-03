@@ -64,9 +64,9 @@ export const equip_weapon_component = (() => {
             loader.setPath('../../resources/weapons/FBX/');
             loader.load(item.RenderParams.name + '.fbx', (fbx) => {
                 this._target = fbx;
-                this._target.scale.setScalar(item.RenderParams.scale);
-                this._target.rotateY(Math.PI);
-                this._target.rotateX(-Math.PI / 3);
+                this._target.scale.setScalar(item.RenderParams.scale/1.3);
+                this._target.rotateY(Math.PI / 1.3);
+                this._target.rotateX(Math.PI / 3);
                 this._target.rotateY(-1);
 
                 this._target.traverse(c => {
