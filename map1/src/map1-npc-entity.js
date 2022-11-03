@@ -101,12 +101,12 @@ export const npc_entity = (() => {
             const loader = new FBXLoader();
 
             // CHECK: resources/monster
-            loader.setPath('../../resources/monsters1/FBX/');
+            loader.setPath('../../resources/Zombie/');
             loader.load(this._params.resourceName, (glb) => {
                 this._target = glb;
                 this._params.scene.add(this._target);
 
-                this._target.scale.setScalar(0.025);
+                this._target.scale.setScalar(0.02);
                 this._target.position.copy(this._parent._position);
                 this._target.position.y += 0.35;
 
@@ -147,7 +147,7 @@ export const npc_entity = (() => {
                 this._animations['idle'] = _FindAnim('Idle');
                 this._animations['walk'] = _FindAnim('Walk');
                 this._animations['death'] = _FindAnim('Death');
-                this._animations['attack'] = _FindAnim('Bite_Front');
+                this._animations['attack'] = _FindAnim('Punch');
 
                 this._stateMachine.SetState('idle');
             });
