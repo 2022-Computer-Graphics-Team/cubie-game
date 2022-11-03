@@ -1,6 +1,8 @@
 import {entity} from "../../src/entity.js";
 import {inventory_controller} from '../../src/inventory-controller.js';
 
+var flag = false;
+export {flag};
 
 /**
  * map3
@@ -157,7 +159,39 @@ export const health_component = (() => {
                 value: ItemName,
                 added: false,
             });
-        }
+
+            var Radio = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'Radio').length
+            var Paddle = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'Paddle').length
+            var Torch = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'Torch').length
+            var WaterBottle = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'WaterBottle_3').length
+            var FlareGun = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'FlareGun').length
+            var Compass = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'Compass_Open').length
+            var Battery = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'Battery_Big').length
+            var Backpack = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'Backpack').length
+            var FirstAidKit = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'FirstAidKit_Hard').length
+            console.log(this._parent._parent._entities[0]._components.UIController._quests)
+
+            if (Radio == this._quests.foo.Radio) {
+                if (Paddle == this._quests.foo.Paddle) {
+                    if (WaterBottle == this._quests.foo.WaterBottle_3) {
+                        if (FlareGun == this._quests.foo.FlareGun) {
+                            if (Compass == this._quests.foo.Compass_Open) {
+                                if (Battery == this._quests.foo.Battery_Big) {
+                                    if (Backpack == this._quests.foo.Backpack) {
+                                        if (FirstAidKit == this._quests.foo.FirstAidKit_Hard) {
+                                            if (Torch == this._quests.foo.Torch) {
+                                                //window.location.replace('../../end.html')
+                                                flag = true;
+                                                console.log(flag)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }        }
 
         _OnDamage(msg) {
             this._health = Math.max(0.0, this._health - msg.value);
