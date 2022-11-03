@@ -253,7 +253,7 @@ class Map2 {
         const player = new entity.Entity();
         player.AddComponent(new player_input.BasicCharacterControllerInput(params));
         player.AddComponent(new player_entity.BasicCharacterController(params));
-        player.AddComponent(new equip_weapon_component.EquipWeapon({anchor: 'mixamorig6RightHand'}));
+        player.AddComponent(new equip_weapon_component.EquipWeapon({anchor: 'mixamorig6RightHandMiddle1'}));
         player.AddComponent(new inventory_controller.InventoryController(params));
         player.AddComponent(new health_component.HealthComponent({
             updateUI  : true,
