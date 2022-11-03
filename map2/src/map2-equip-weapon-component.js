@@ -29,8 +29,8 @@ export const equip_weapon_component = (() => {
 
         _AttachTarget() {
             if (this._bones && this._target) {
-                // this._bones[this._params.anchor].add(this._target);
-                this._bones[this._params.anchor] = this._target;
+                this._bones[this._params.anchor].add(this._target);
+                //this._bones[this._params.anchor] = this._target;
             }
         }
 
