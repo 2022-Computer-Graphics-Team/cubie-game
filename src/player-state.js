@@ -46,6 +46,7 @@ export const player_state = (() => {
         }
 
         Exit() {
+            // window.location.replace('../fail_to_map1.html')
         }
 
         Update(_) {

@@ -75,6 +75,9 @@ export const health_component = (() => {
          * 플레이어의 HP가 0이 되었을 때, 즉 사망했을 때
          */
         _OnDeath(attacker) {
+            // CHECK: 여기가 맞는지 확인하기
+            window.location.replace('../fail_to_map1.html')
+
             if (attacker) {
                 attacker.Broadcast({
                     topic: 'health.add-experience',

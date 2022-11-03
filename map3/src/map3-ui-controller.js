@@ -78,7 +78,7 @@ export const ui_controller = (() => {
                                     if (Backpack == this._quests.foo.Backpack) {
                                         if (FirstAidKit == this._quests.foo.FirstAidKit_Hard) {
                                             if (Torch == this._quests.foo.Torch) {
-                                                window.location.replace('../Success.html')
+                                                window.location.replace('../../end.html')
                                             }
                                         }
                                     }
