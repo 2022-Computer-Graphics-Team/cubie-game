@@ -30,6 +30,9 @@ export const equip_weapon_component = (() => {
         _AttachTarget() {
             if (this._bones && this._target) {
                 // this._bones[this._params.anchor].add(this._target);
+
+                console.log(this._bones);
+
                 this._bones[this._params.anchor] = this._target;
             }
         }
@@ -63,6 +66,9 @@ export const equip_weapon_component = (() => {
             const loader = new FBXLoader();
             loader.setPath('../../resources/weapons/FBX/');
             loader.load(item.RenderParams.name + '.fbx', (fbx) => {
+
+                console.log(item.RenderParams);
+
                 this._target = fbx;
                 this._target.scale.setScalar(item.RenderParams.scale);
                 this._target.rotateY(Math.PI);
