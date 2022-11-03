@@ -77,8 +77,6 @@ export const health_component = (() => {
         }
 
         _OnDeath(attacker) {
-            window.location.replace('../fail_to_map3.html')
-
             if (attacker) {
                 attacker.Broadcast({
                     topic: 'health.add-experience',
@@ -175,7 +173,7 @@ export const health_component = (() => {
 
             this._UpdateUI();
         }
-    };
+    }
 
     return {
         HealthComponent: HealthComponent,
