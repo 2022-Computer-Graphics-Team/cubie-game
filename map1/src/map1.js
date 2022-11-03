@@ -113,7 +113,7 @@ class Map1 {
         const plane = new THREE.Mesh(
             new THREE.PlaneGeometry(5000, 5000, 10, 10),
             new THREE.MeshStandardMaterial({
-                color: 0x1e601c,
+                color: 0x013220,
             }));
 
         plane.castShadow = false;
@@ -173,8 +173,8 @@ class Map1 {
         this._scene.add(hemiLight);
 
         const uniforms = {
-            "topColor"   : {value: new THREE.Color(0x0077ff)},
-            "bottomColor": {value: new THREE.Color(0xffffff)},
+            "topColor"   : {value: new THREE.Color(0x000000)},
+            "bottomColor": {value: new THREE.Color(0x696969)},
             "offset"     : {value: 33},
             "exponent"   : {value: 0.6}
         };
