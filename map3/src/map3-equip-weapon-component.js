@@ -31,8 +31,8 @@ export const equip_weapon_component = (() => {
             if (this._bones && this._target) {
 
                 // CHECK: 기존에 잘 되던 코드가 갑자기 안 됨. (add method)
-                // this._bones[this._params.anchor].add(this._target);
-                this._bones[this._params.anchor] = this._target;
+                this._bones[this._params.anchor].add(this._target);
+                // this._bones[this._params.anchor] = this._target;
             }
         }
 
