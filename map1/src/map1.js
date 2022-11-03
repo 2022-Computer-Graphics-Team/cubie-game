@@ -441,34 +441,27 @@ class Map1 {
             }
         }
 
-        for (let i = 0; i < 50; ++i) {
+        for (let i = 0; i < 100; ++i) {
 
             // FIXME: 몬스터를 좀비로 바꾸자!
             const monsters = [
                 {
-                    resourceName   : 'Ghost.fbx',
-                    resourceTexture: 'Ghost_Texture.png',
+                    resourceName   : 'Zombie_Male.fbx',
+                    resourcePath: './resources/Zombie/',
                 },
                 {
-                    resourceName   : 'Alien.fbx',
-                    resourceTexture: 'Alien_Texture.png',
+                    resourceName   : 'Zombie_Female.fbx',
+                    resourcePath: './resources/Zombie/',
                 },
                 {
-                    resourceName   : 'Skull.fbx',
-                    resourceTexture: 'Skull_Texture.png',
+                    resourceName   : 'Goblin_Female.fbx',
+                    resourcePath: './resources/Zombie/',
                 },
                 {
-                    resourceName   : 'GreenDemon.fbx',
-                    resourceTexture: 'GreenDemon_Texture.png',
+                    resourceName   : 'Goblin_Male.fbx',
+                    resourcePath: './resources/Zombie/',
                 },
-                {
-                    resourceName   : 'Cyclops.fbx',
-                    resourceTexture: 'Cyclops_Texture.png',
-                },
-                {
-                    resourceName   : 'Cactus.fbx',
-                    resourceTexture: 'Cactus_Texture.png',
-                },
+           
             ];
 
             const m = monsters[math.rand_int(0, monsters.length - 1)];
@@ -478,7 +471,7 @@ class Map1 {
                 camera         : this._camera,
                 scene          : this._scene,
                 resourceName   : m.resourceName,
-                resourceTexture: m.resourceTexture,
+                resourcePath   : m.resourcePath,
             }));
 
             npc.AddComponent(
