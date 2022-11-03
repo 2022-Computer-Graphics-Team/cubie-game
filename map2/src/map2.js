@@ -322,53 +322,45 @@ class Map2 {
                     }));
             }
         }
-
-        // 몬스터
-        for (let i = 0; i < 50; ++i) {
+        for (let i = 0; i < 10; ++i) {
 
             // FIXME: 몬스터를 좀비로 바꾸자!
             const monsters = [
                 {
-                    resourceName   : 'Ghost.fbx',
-                    resourceTexture: 'Ghost_Texture.png',
+                    resourceName: 'Zombie_Male.fbx',
+                    resourcePath: './resources/zombie/',
                 },
                 {
-                    resourceName   : 'Alien.fbx',
-                    resourceTexture: 'Alien_Texture.png',
+                    resourceName: 'Zombie_Female.fbx',
+                    resourcePath: './resources/zombie/',
                 },
                 {
-                    resourceName   : 'Skull.fbx',
-                    resourceTexture: 'Skull_Texture.png',
+                    resourceName: 'Goblin_Female.fbx',
+                    resourcePath: './resources/zombie/',
                 },
                 {
-                    resourceName   : 'GreenDemon.fbx',
-                    resourceTexture: 'GreenDemon_Texture.png',
+                    resourceName: 'Goblin_Male.fbx',
+                    resourcePath: './resources/zombie/',
                 },
-                {
-                    resourceName   : 'Cyclops.fbx',
-                    resourceTexture: 'Cyclops_Texture.png',
-                },
-                {
-                    resourceName   : 'Cactus.fbx',
-                    resourceTexture: 'Cactus_Texture.png',
-                },
+
             ];
 
             const m = monsters[math.rand_int(0, monsters.length - 1)];
 
             const npc = new entity.Entity();
             npc.AddComponent(new npc_entity.NPCController({
-                camera         : this._camera,
-                scene          : this._scene,
-                resourceName   : m.resourceName,
-                resourceTexture: m.resourceTexture,
+                camera      : this._camera,
+                scene       : this._scene,
+                resourceName: m.resourceName,
+                resourcePath: m.resourcePath,
             }));
 
+            // NOTE: strength = 50
             npc.AddComponent(
                 new health_component.HealthComponent({
                     health    : 50,
                     maxHealth : 50,
-                    strength  : 2,
+                    strength  : 5,
                     wisdomness: 2,
                     benchpress: 3,
                     curl      : 1,
@@ -380,6 +372,8 @@ class Map2 {
 
             npc.AddComponent(
                 new spatial_grid_controller.SpatialGridController({grid: this._grid}));
+
+            // NOTE: 체력 지우기
             npc.AddComponent(new health_bar.HealthBar({
                 parent: this._scene,
                 camera: this._camera,
@@ -390,10 +384,8 @@ class Map2 {
                 (Math.random() * 2 - 1) * 500,
                 0,
                 (Math.random() * 2 - 1) * 500));
-
-            // this._entityManager.Add(npc);  // 몬스터 공격력 사라짐.
-
-        }   // end of monster
+            this._entityManager.Add(npc);
+        }
     }
 
     _OnWindowResize() {
