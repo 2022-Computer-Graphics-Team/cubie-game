@@ -233,9 +233,9 @@ class Map2 {
         const key = new entity.Entity();
         key.AddComponent(new gltf_component.StaticModelComponent({
             scene          : this._scene,
-            resourcePath   : '../resources/key/source/',
+            resourcePath   : './resources/key/source/',
             resourceName   : 'ancient_key.fbx',
-            resourceTexture: '../resources/key/textures/key_normal.png',
+            resourceTexture: './resources/key/textures/key_normal.png',
             scale          : 0.35,
             receiveShadow  : true,
             castShadow     : true,
