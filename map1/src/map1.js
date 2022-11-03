@@ -479,7 +479,7 @@ class Map1 {
                 new health_component.HealthComponent({
                     health    : 50,
                     maxHealth : 50,
-                    strength  : 5,
+                    strength  : 3,
                     wisdomness: 2,
                     benchpress: 3,
                     curl      : 1,

@@ -329,28 +329,20 @@ class Map2 {
             // FIXME: 몬스터를 좀비로 바꾸자!
             const monsters = [
                 {
-                    resourceName   : 'Ghost.fbx',
-                    resourceTexture: 'Ghost_Texture.png',
+                    resourceName: 'Zombie_Male.fbx',
+                    resourcePath: './resources/zombie/',
                 },
                 {
-                    resourceName   : 'Alien.fbx',
-                    resourceTexture: 'Alien_Texture.png',
+                    resourceName: 'Zombie_Female.fbx',
+                    resourcePath: './resources/zombie/',
                 },
                 {
-                    resourceName   : 'Skull.fbx',
-                    resourceTexture: 'Skull_Texture.png',
+                    resourceName: 'Goblin_Female.fbx',
+                    resourcePath: './resources/zombie/',
                 },
                 {
-                    resourceName   : 'GreenDemon.fbx',
-                    resourceTexture: 'GreenDemon_Texture.png',
-                },
-                {
-                    resourceName   : 'Cyclops.fbx',
-                    resourceTexture: 'Cyclops_Texture.png',
-                },
-                {
-                    resourceName   : 'Cactus.fbx',
-                    resourceTexture: 'Cactus_Texture.png',
+                    resourceName: 'Goblin_Male.fbx',
+                    resourcePath: './resources/zombie/',
                 },
             ];
 
@@ -368,7 +360,7 @@ class Map2 {
                 new health_component.HealthComponent({
                     health    : 50,
                     maxHealth : 50,
-                    strength  : 2,
+                    strength  : 3,
                     wisdomness: 2,
                     benchpress: 3,
                     curl      : 1,

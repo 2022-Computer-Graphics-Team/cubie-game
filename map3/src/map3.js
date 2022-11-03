@@ -513,7 +513,6 @@ class HackNSlashDemo {
                 {
                     resourceName: 'FirstAidKit_Hard.fbx'
                 }
-
             ];
 
             let m = null;
@@ -546,7 +545,7 @@ class HackNSlashDemo {
                 new health_component.HealthComponent({
                     health    : 50,
                     maxHealth : 50,
-                    strength  : 2,
+                    strength  : 3,
                     wisdomness: 0,
                     benchpress: 0,
                     curl      : 0,
