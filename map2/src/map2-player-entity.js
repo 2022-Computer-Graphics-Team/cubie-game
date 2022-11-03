@@ -62,6 +62,10 @@ export const player_entity = (() => {
 
         _OnDeath(msg) {
             this._stateMachine.SetState('death');
+
+            setTimeout(function() {
+                window.location.replace('../fail_to_map2.html')
+            }, 5000);
         }
 
         /**

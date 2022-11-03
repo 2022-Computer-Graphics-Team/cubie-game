@@ -369,7 +369,8 @@ class Map1 {
         player.AddComponent(new player_input.BasicCharacterControllerInput(params));
         player.AddComponent(new player_entity.BasicCharacterController(params));
         // player.AddComponent(new equip_weapon_component.EquipWeapon({anchor: 'RightHandIndex1'}));
-        player.AddComponent(new equip_weapon_component.EquipWeapon({anchor: 'mixamorig6RightHandIndex1'}));
+        // player.AddComponent(new equip_weapon_component.EquipWeapon({anchor: 'mixamorig6RightHandIndex1'}));
+        player.AddComponent(new equip_weapon_component.EquipWeapon({anchor: 'RightHand'}));
         player.AddComponent(new inventory_controller.InventoryController(params));
         player.AddComponent(new health_component.HealthComponent({
             updateUI  : true,
@@ -445,39 +446,40 @@ class Map1 {
             // FIXME: 몬스터를 좀비로 바꾸자!
             const monsters = [
                 {
-                    resourceName   : 'Zombie_Male.fbx',
+                    resourceName: 'Zombie_Male.fbx',
                     resourcePath: './resources/zombie/',
                 },
                 {
-                    resourceName   : 'Zombie_Female.fbx',
+                    resourceName: 'Zombie_Female.fbx',
                     resourcePath: './resources/zombie/',
                 },
                 {
-                    resourceName   : 'Goblin_Female.fbx',
+                    resourceName: 'Goblin_Female.fbx',
                     resourcePath: './resources/zombie/',
                 },
                 {
-                    resourceName   : 'Goblin_Male.fbx',
+                    resourceName: 'Goblin_Male.fbx',
                     resourcePath: './resources/zombie/',
                 },
-           
+
             ];
 
             const m = monsters[math.rand_int(0, monsters.length - 1)];
 
             const npc = new entity.Entity();
             npc.AddComponent(new npc_entity.NPCController({
-                camera         : this._camera,
-                scene          : this._scene,
-                resourceName   : m.resourceName,
-                resourcePath   : m.resourcePath,
+                camera      : this._camera,
+                scene       : this._scene,
+                resourceName: m.resourceName,
+                resourcePath: m.resourcePath,
             }));
 
+            // NOTE: strength = 50
             npc.AddComponent(
                 new health_component.HealthComponent({
                     health    : 50,
                     maxHealth : 50,
-                    strength  : 2,
+                    strength  : 5,
                     wisdomness: 2,
                     benchpress: 3,
                     curl      : 1,
@@ -489,10 +491,13 @@ class Map1 {
 
             npc.AddComponent(
                 new spatial_grid_controller.SpatialGridController({grid: this._grid}));
+
+            // NOTE: 체력 지우기
             npc.AddComponent(new health_bar.HealthBar({
                 parent: this._scene,
                 camera: this._camera,
             }));
+
             npc.AddComponent(new attack_controller.AttackController({timing: 0.35}));
             npc.SetPosition(new THREE.Vector3(
                 (Math.random() * 2 - 1) * 500,

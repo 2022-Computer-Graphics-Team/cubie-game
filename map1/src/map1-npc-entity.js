@@ -63,7 +63,7 @@ export const npc_entity = (() => {
 
             this._animations = {};
             this._input = new AIInput();
-            // FIXME
+
             this._stateMachine = new NPCFSM(
                 new player_entity.BasicCharacterControllerProxy(this._animations));
 
@@ -88,7 +88,6 @@ export const npc_entity = (() => {
             let mission = document.getElementById('mission-text')
             mission.innerHTML = 'You have to kill 10 zombies. (' + countd + '/10)'
         }
-
 
         _OnPosition(m) {
             if (this._target) {
