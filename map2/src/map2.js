@@ -375,7 +375,6 @@ class Map2 {
                 resourcePath: m.resourcePath,
             }));
 
-            // NOTE: strength = 50
             npc.AddComponent(
                 new health_component.HealthComponent({
                     health    : 50,

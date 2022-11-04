@@ -128,7 +128,7 @@ export const player_entity = (() => {
                 loader.load('Sword And Shield Walk.fbx', (a) => {
                     _OnLoad('walk', a);
                 });
-                loader.load('Stabbing.fbx', (a) => {
+                loader.load('Sword And Shield Slash.fbx', (a) => {
                     _OnLoad('attack', a);
                 });
                 loader.load('Sword And Shield Death.fbx', (a) => {
@@ -136,9 +136,6 @@ export const player_entity = (() => {
                 });
                 loader.load('Picking Up.fbx', (a) => {
                     _OnLoad('pick', a);
-                });
-                loader.load('Sword And Shield Jump.fbx', (a) => {
-                    _OnLoad('jump', a);
                 });
 
                 loader.load();

@@ -143,12 +143,9 @@ export const player_entity = (() => {
                 loader.load('Picking Up.fbx', (a) => {
                     _OnLoad('pick', a);
                 });
-                loader.load('Sword And Shield Jump.fbx', (a) => {
-                    _OnLoad('jump', a);
-                });
 
                 loader.load();
-            });
+            });4
         }
 
         _FindIntersections(pos) {
