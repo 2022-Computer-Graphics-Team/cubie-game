@@ -76,8 +76,6 @@ class Map1 {
 
         /* 카메라 */
 
-        // this._SetThirdPersonCamera()
-
         const fov = 60;
         const aspect = 1920 / 1080;
         const near = 1.0;
@@ -127,7 +125,7 @@ class Map1 {
         this._grid = new spatial_hash_grid.SpatialHashGrid(
             [[-1000, -1000], [1000, 1000]], [100, 100]);
 
-        // NOTE: 로딩바를 위해선 _LoadPlayer() 함수가 맨 밑에 와야 함.
+        // 로딩바를 위해선 _LoadPlayer() 함수가 맨 밑에 와야 함.
         this._LoadControllers();
         this._LoadFoliage();
         this._LoadClouds();
@@ -142,8 +140,7 @@ class Map1 {
             scene       : this._scene,
             resourcePath: './resources/forest1/',
             resourceName: 'scene.gltf',
-            scale       : // Math.random() * 5 + 10,
-                10,
+            scale       : 10,
             position    : pos,
         }));
         e1.SetPosition(pos);
@@ -286,8 +283,6 @@ class Map1 {
                 'Willow', 'Willow_Dead',
                 'PineTree',
             ];
-            const name = names[math.rand_int(0, names.length - 1)];
-            const index = math.rand_int(1, 5);
 
             const pos = new THREE.Vector3(
                 (Math.random() * 2.0 - 1.0) * 500,
@@ -368,8 +363,6 @@ class Map1 {
         const player = new entity.Entity();
         player.AddComponent(new player_input.BasicCharacterControllerInput(params));
         player.AddComponent(new player_entity.BasicCharacterController(params));
-        // player.AddComponent(new equip_weapon_component.EquipWeapon({anchor: 'RightHandIndex1'}));
-        // player.AddComponent(new equip_weapon_component.EquipWeapon({anchor: 'mixamorig6RightHandIndex1'}));
         player.AddComponent(new equip_weapon_component.EquipWeapon({anchor: 'mixamorig6RightHandMiddle1'}));
         player.AddComponent(new inventory_controller.InventoryController(params));
         player.AddComponent(new health_component.HealthComponent({
@@ -408,7 +401,7 @@ class Map1 {
 
         /* 카메라 */
 
-        const camera = new entity.Entity();
+        let camera = new entity.Entity();
         camera.AddComponent(
             new third_person_camera.ThirdPersonCamera({
                 camera: this._camera,
@@ -417,33 +410,39 @@ class Map1 {
         document.addEventListener("keydown", keyDown, false);
         this._entityManager.Add(camera, 'player-camera');
 
-
-        // FIXME: 키를 눌렀을 때 (1, 2번) 제대로 카메라 전환이 되도록 수정해야 한다.
         function keyDown(event) {
 
-            // 숫자 키패드 1번을 눌렀을 때 1인칭 시점 카메라로 전환된다.
-            if (event.keyCode === 49) {
-                camera.AddComponent(
-                    new first_person_camera.FirstPersonCamera({
-                        camera: object._camera,
-                        target: object._entityManager.Get('player')
-                    }));
-            }
-
-            // 숫자 키패드 2번을 눌렀을 때 3인칭 시점 카메라로 전환된다.
-            // FIXME: 이 부분이 잘 안 된다!
             if (event.keyCode === 50) {
+                camera = null
+                camera = new entity.Entity();
+
+                // 숫자 키패드 2번을 눌렀을 때 3인칭 시점 카메라로 전환된다.
                 camera.AddComponent(
                     new third_person_camera.ThirdPersonCamera({
                         camera: object._camera,
                         target: object._entityManager.Get('player')
                     }));
+
+                object._entityManager.Add(camera, 'player-camera');
+            }
+
+            if (event.keyCode === 49) {
+                camera = null
+                camera = new entity.Entity();
+
+                // 숫자 키패드 1번을 눌렀을 때 1인칭 시점 카메라로 전환된다.
+                camera.AddComponent(
+                    new first_person_camera.FirstPersonCamera({
+                        camera: object._camera,
+                        target: object._entityManager.Get('player')
+                    }));
+
+                object._entityManager.Add(camera, 'player-camera');
             }
         }
 
-        for (let i = 0; i < 100; ++i) {
+        for (let i = 0; i < 10; ++i) {
 
-            // FIXME: 몬스터를 좀비로 바꾸자!
             const monsters = [
                 {
                     resourceName: 'Zombie_Male.fbx',
@@ -479,7 +478,7 @@ class Map1 {
                 new health_component.HealthComponent({
                     health    : 50,
                     maxHealth : 50,
-                    strength  : 5,
+                    strength  : 3,
                     wisdomness: 2,
                     benchpress: 3,
                     curl      : 1,
@@ -491,13 +490,10 @@ class Map1 {
 
             npc.AddComponent(
                 new spatial_grid_controller.SpatialGridController({grid: this._grid}));
-
-            // NOTE: 체력 지우기
             npc.AddComponent(new health_bar.HealthBar({
                 parent: this._scene,
                 camera: this._camera,
             }));
-
             npc.AddComponent(new attack_controller.AttackController({timing: 0.35}));
             npc.SetPosition(new THREE.Vector3(
                 (Math.random() * 2 - 1) * 500,
@@ -534,7 +530,6 @@ class Map1 {
 
             this._threejs.render(this._scene, this._camera);
             this._Step(t - this._previousRAF);
-            //mconsole.log(this)
             this._previousRAF = t;
         });
     }
@@ -545,26 +540,6 @@ class Map1 {
         this._UpdateSun();
 
         this._entityManager.Update(timeElapsedS);
-    }
-
-    _SetThirdPersonCamera() {
-        const fov = 60;
-        const aspect = 1920 / 1080;
-        const near = 1.0;
-        const far = 10000.0;
-
-        this._camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-        this._camera.position.set(25, 10, 25);
-    }
-
-    _SetFirstersonCamera() {
-        const fov = 60;
-        const aspect = 1920 / 1080;
-        const near = 1.0;
-        const far = 10000.0;
-
-        this._camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-        this._camera.position.set(0, 10, 0);
     }
 }
 

@@ -19,8 +19,9 @@ export const player_input = (() => {
      * s     :   backward
      * a     :   left
      * d     :   right
-     * space :   attack
+     * ctrl  :   attack
      * shift :   run (with w)
+     * z     :   pick
      */
     class BasicCharacterControllerInput extends entity.Component {
         constructor(params) {
@@ -35,10 +36,11 @@ export const player_input = (() => {
                 backward: false,
                 left    : false,
                 right   : false,
-                space   : false,
+                ctrl    : false,
                 shift   : false,
                 camera  : false,
-                jump    : false,
+                pick    : false,
+                space   : false,
             };
             this._raycaster = new THREE.Raycaster();
             document.addEventListener('keydown', (e) => this._onKeyDown(e), false);
@@ -97,11 +99,14 @@ export const player_input = (() => {
                 case 32: // SPACE
                     this._keys.space = true;
                     break;
+                case 17: // CTRL
+                    this._keys.ctrl = true;
+                    break;
                 case 16: // SHIFT
                     this._keys.shift = true;
                     break;
                 case 90: // z
-                    this._keys.jump = true;
+                    this._keys.pick = true;
                     break;
             }
         }
@@ -123,11 +128,14 @@ export const player_input = (() => {
                 case 32: // SPACE
                     this._keys.space = false;
                     break;
+                case 17: // CTRL
+                    this._keys.ctrl = false;
+                    break;
                 case 16: // SHIFT
                     this._keys.shift = false;
                     break;
                 case 90: // z
-                    this._keys.jump = false;
+                    this._keys.pick = false;
                     break;
             }
         }

@@ -117,7 +117,7 @@ export const player_entity = (() => {
                 this._manager.onLoad = () => {
                     this._stateMachine.SetState('idle');
 
-                    // NOTE: 여기서 모든 FBX 로드가 끝났다고 보고 진행하기
+                    // 여기서 모든 FBX 로드가 끝났다고 보고 진행하기
                     document.getElementById('loading').style.visibility = 'hidden';
                     document.getElementById('loading').style.display = 'none';
                     document.getElementById('ui').style.visibility = 'visible';
@@ -141,6 +141,11 @@ export const player_entity = (() => {
                 loader.load('Sword And Shield Death.fbx', (a) => {
                     _OnLoad('death', a);
                 });
+                loader.load('Picking Up.fbx', (a) => {
+                    _OnLoad('pick', a);
+                });
+
+                loader.load();
             });
         }
 
@@ -167,7 +172,7 @@ export const player_entity = (() => {
             }
 
             if ((pos.x >= 350 && pos.x < 450) && (pos.z >= 368 && pos.z <= 380) && (countd >= 10)) {
-                // CHECK: 다음 스테이지로 넘어가는 부분
+                // 다음 스테이지로 넘어가는 부분
                 window.location.replace('../../map2/map2.html')
             }
             return collisions;
@@ -219,7 +224,7 @@ export const player_entity = (() => {
 
             const acc = this._acceleration.clone();
             if (input._keys.shift) {
-                acc.multiplyScalar(2.0);
+                acc.multiplyScalar(3.0);
             }
 
             if (input._keys.forward) {

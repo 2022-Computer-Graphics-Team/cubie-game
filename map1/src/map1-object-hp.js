@@ -34,14 +34,15 @@ export const health_component = (() => {
 
             const healthAsPercentage = this._health / this._maxHealth;
 
-            // NOTE: HP 조절 (공격 받으면 HP가 줄어들게끔)
+            // HP 조절 (공격 받으면 HP가 줄어들게끔)
             // bar.style.width = Math.floor(200 * healthAsPercentage) + 'px';
-            bar.style.width = Math.floor(960 * healthAsPercentage) + 'px';
+            bar.style.width = Math.floor((window.innerWidth / 2) * healthAsPercentage) + 'px';
         }
 
         _ComputeLevelXPRequirement() {
             const level = this._params.level;
-            const xpRequired = Math.round(2 ** (level - 1) * 100);
+            // const xpRequired = Math.round(2 ** (level - 1) * 100);
+            const xpRequired = Math.round(2 ** (1 - 1) * 100);
             return xpRequired;
         }
 

@@ -76,7 +76,6 @@ export const quest_component = (() => {
         }
 
         _AddQuestToJournal(quest) {
-            console.log(this)
 
             const ui = this.FindEntity('ui').GetComponent('UIController');
             ui.AddQuest(quest);

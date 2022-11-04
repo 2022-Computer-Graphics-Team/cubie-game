@@ -15,28 +15,19 @@ export const ui_controller = (() => {
             };
 
             this._ui.quests.onclick = (m) => {
-                console.log("click quest")
                 this._OnQuestsClicked(m);
             };
+
         }
 
         AddQuest(quest) {
             if (quest.id in this._quests) {
                 return;
             }
-            // const e = document.createElement('p');
-            // //e.className = 'quest-entry';
-            // e.id = 'quest-entry-' + quest.id;
-            // e.innerText = quest.title;
-            // e.onclick = (evt) => {
-            //     this._OnQuestSelected(e.id);
-            // };
-            // document.getElementById('mission-ui').appendChild(e);
-
 
             this._quests[quest.id] = quest;
             this._OnQuestSelected(quest.id);
-            console.log("add quest")
+            //console.log("add quest")
 
         }
 

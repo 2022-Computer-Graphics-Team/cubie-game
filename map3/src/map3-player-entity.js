@@ -134,11 +134,11 @@ export const player_entity = (() => {
                 loader.load('Sword And Shield Death.fbx', (a) => {
                     _OnLoad('death', a);
                 });
+                loader.load('Picking Up.fbx', (a) => {
+                    _OnLoad('pick', a);
+                });
 
-                // FIXME: 추가할지 말지 고민하고 수정하기
-                loader.load('Sword And Shield Jump.fbx', (a) => {
-                    _OnLoad('jump', a);
-                })
+                loader.load();
             });
         }
 
@@ -163,7 +163,7 @@ export const player_entity = (() => {
                     collisions.push(nearby[i].entity);
                 }
             }
-            console.log(pos.x + " " + pos.z + " " + flag)
+            //console.log(pos.x + " " + pos.z + " " + flag)
             if ((pos.x >= 350 && pos.x < 450) && (pos.z >= 350 && pos.z <= 450) && (flag == true)) {
                 // CHECK: 다음 스테이지로 넘어가는 부분
                 window.location.replace('../../end.html')
@@ -218,7 +218,7 @@ export const player_entity = (() => {
 
             const acc = this._acceleration.clone();
             if (input._keys.shift) {
-                acc.multiplyScalar(2.0);
+                acc.multiplyScalar(3.0);
             }
             if (input._keys.forward) {
                 velocity.z += acc.z * timeInSeconds;
