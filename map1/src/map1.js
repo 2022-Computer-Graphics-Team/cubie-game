@@ -432,11 +432,11 @@ class Map1 {
                         target: object._entityManager.Get('player')
                     }));
 
-                player.Broadcast({
-                    topic: 'first_person_camera',
-                    model: this._target,
-                    bones: this._bones
-                })
+                // player.Broadcast({
+                //     topic: 'first_person_camera',
+                //     model: this._target,
+                //     bones: this._bones
+                // })
             }
             // FIXME: 이 부분이 잘 안 된다!
             else if (event.keyCode === 50) {
@@ -450,11 +450,11 @@ class Map1 {
                         target: object._entityManager.Get('player')
                     }));
 
-                player.Broadcast({
-                    topic: 'third_person_camera',
-                    model: this._target,
-                    bones: this._bones
-                })
+                // player.Broadcast({
+                //     topic: 'third_person_camera',
+                //     model: this._target,
+                //     bones: this._bones
+                // })
             }
         }
 

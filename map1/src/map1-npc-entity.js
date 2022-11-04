@@ -79,7 +79,6 @@ export const npc_entity = (() => {
             });
         }
 
-
         _OnDeath(msg) {
             this._stateMachine.SetState('death');
             countd += 1;
