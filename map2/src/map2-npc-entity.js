@@ -216,7 +216,7 @@ export const npc_entity = (() => {
 
             if (currentState.Name == 'death') {
 
-                console.log("Dead!")
+                //console.log("Dead!")
                 return;
             }
 

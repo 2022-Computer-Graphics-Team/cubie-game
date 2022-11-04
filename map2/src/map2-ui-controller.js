@@ -11,30 +11,30 @@ export const ui_controller = (() => {
         }
 
         InitComponent() {
-            this._iconBar = {
-                map    : document.getElementById('icon-bar-map'),
-            };
-
-            this._ui = {
-                map    : document.getElementById('map'),
-            };
-
-            this._iconBar.map.onclick = (m) => {
-                this._OnStatsClicked(m);
-            };
-            
-            this._HideUI();
+            // this._iconBar = {
+            //     map    : document.getElementById('icon-bar-map'),
+            // };
+            //
+            // this._ui = {
+            //     map    : document.getElementById('map'),
+            // };
+            //
+            // this._iconBar.map.onclick = (m) => {
+            //     this._OnStatsClicked(m);
+            // };
+            //
+            // this._HideUI();
         }
 
         _HideUI() {
-            this._ui.map.style.visibility = 'hidden';
+            // this._ui.map.style.visibility = 'hidden';
         }
 
-        _OnStatsClicked(msg) {
-            const visibility = this._ui.map.style.visibility;
-            this._HideUI();
-            this._ui.map.style.visibility = (visibility ? '' : 'hidden');
-        }
+        // _OnStatsClicked(msg) {
+        //     const visibility = this._ui.map.style.visibility;
+        //     this._HideUI();
+        //     this._ui.map.style.visibility = (visibility ? '' : 'hidden');
+        // }
 
         Update(timeInSeconds) {
         }
