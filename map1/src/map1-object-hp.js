@@ -36,7 +36,7 @@ export const health_component = (() => {
 
             // HP 조절 (공격 받으면 HP가 줄어들게끔)
             // bar.style.width = Math.floor(200 * healthAsPercentage) + 'px';
-            bar.style.width = Math.floor(960 * healthAsPercentage) + 'px';
+            bar.style.width = Math.floor((window.innerWidth / 2) * healthAsPercentage) + 'px';
         }
 
         _ComputeLevelXPRequirement() {

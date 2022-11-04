@@ -41,6 +41,8 @@ export const health_component = (() => {
             // CHANGED: HP바의 width 제한두지 않고 그냥 고정적인 하드 코딩으로 만듦.
             // bar.style.width = Math.floor(200 * healthAsPercentage) + 'px';
 
+            bar.style.width = Math.floor((window.innerWidth / 2) * healthAsPercentage) + 'px';
+
             // document.getElementById('stats-strength').innerText = this._params.strength;
             // document.getElementById('stats-wisdomness').innerText = this._params.wisdomness;
             // document.getElementById('stats-benchpress').innerText = this._params.benchpress;

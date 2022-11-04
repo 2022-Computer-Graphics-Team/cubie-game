@@ -64,7 +64,7 @@ export const attack_controller = (() => {
                     const dirToTarget = target._position.clone().sub(this._parent._position);
                     dirToTarget.normalize();
 
-                    const forward = new THREE.Vector3(0, 0, 30);
+                    const forward = new THREE.Vector3(0, 0, 40);
                     // const forward = new THREE.Vector3(0, 0, 5);
                     forward.applyQuaternion(this._parent._rotation);
                     forward.normalize();

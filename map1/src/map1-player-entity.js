@@ -224,7 +224,7 @@ export const player_entity = (() => {
 
             const acc = this._acceleration.clone();
             if (input._keys.shift) {
-                acc.multiplyScalar(2.0);
+                acc.multiplyScalar(3.0);
             }
 
             if (input._keys.forward) {
