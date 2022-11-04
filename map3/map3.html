@@ -2,7 +2,8 @@
 <html>
 <head>
     <title>Stage 3. In the beach</title>
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+          charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../css/cover.css">
     <script src="./src/map3.js" type="module"></script>
 </head>
@@ -13,8 +14,8 @@
     <div class="ui">
         <div class="mission-ui-layout">
             <div class="mission-ui" id="mission-ui">
-                <p class="mission-title">At Stage 3: Escape from the beach!</p>
-                <p class="mission-text">You need to get the necessary items.</p>
+                <p class="mission-title" id="mission-title">At Stage 3: Escape from the beach!</p>
+                <p class="mission-text" id="mission-text">You need to get the necessary items.</p>
             </div>
         </div>
     </div>
@@ -22,6 +23,9 @@
     <!-- 캐릭터의 HP 표시 -->
     <div class="ui">
         <div class="health-ui">
+            <!-- 뒤에 검은색 바를 표시하기 위해 -->
+            <div class="background-bar"></div>
+            <!-- HP바 -->
             <div class="health-bar" id="health-bar"></div>
         </div>
     </div>

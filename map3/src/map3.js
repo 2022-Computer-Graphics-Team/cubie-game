@@ -3,27 +3,24 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118.1/build/three.m
 import {third_person_camera} from '../../src/third-person-camera.js';
 import {first_person_camera} from '../../src/first-person-camera.js';
 
-import {math} from '../../src/math.js';
-
-import {entity} from '../../src/entity.js';
-import {player_entity} from './map3-player-entity.js'
-import {entity_manager} from '../../src/entity-manager.js';
-
-import {ui_controller} from './map3-ui-controller.js';
-import {health_component} from './map3-object-hp.js';
-import {health_bar} from '../../src/health-bar.js';
-
-import {player_input} from '../../src/player-input.js';
-import {equip_weapon_component} from './map3-equip-weapon-component.js';
 import {attack_controller} from '../../src/attacker-controller.js';
+import {entity} from '../../src/entity.js';
+import {entity_manager} from '../../src/entity-manager.js';
+import {health_bar} from '../../src/health-bar.js';
 import {inventory_controller} from '../../src/inventory-controller.js';
-
 import {gltf_component} from '../../src/gltf-component.js';
-
-import {spatial_hash_grid} from '../../src/spatial-hash-grid.js';
-import {spatial_grid_controller} from '../../src/spatial-grid-controller.js';
-
+import {math} from '../../src/math.js';
 import {level_up_component} from '../../src/particle-effect.js';
+import {player_input} from '../../src/player-input.js';
+import {spatial_grid_controller} from '../../src/spatial-grid-controller.js';
+import {spatial_hash_grid} from '../../src/spatial-hash-grid.js';
+
+import {equip_weapon_component} from './map3-equip-weapon-component.js';
+import {quest_component} from './map3-mission-component.js';
+import {health_component} from './map3-object-hp.js';
+import {player_entity} from './map3-player-entity.js'
+import {ui_controller} from './map3-ui-controller.js';
+
 
 const _VS = `
 varying vec3 vWorldPosition;
@@ -136,6 +133,7 @@ class HackNSlashDemo {
         this._LoadPlayer();
         this._LoadClouds();
         this._LoadSky();
+        this._LoadPortal();
         this._previousRAF = null;
         this._RAF();
     }
@@ -151,6 +149,7 @@ class HackNSlashDemo {
 
     /**
      * 맵: 바다
+     * CHECK: 여기에 resourcePath 부분 제대로 동작하는지 확인하기
      */
     _LoadSea() {
         const e = new entity.Entity();
@@ -210,7 +209,7 @@ class HackNSlashDemo {
      * 맵: 자연 구조물
      */
     _LoadFoliage() {
-        for (let i = 0; i < 150; ++i) {
+        for (let i = 0; i < 200; ++i) {
             const names = [
                 'CommonTree_Dead', 'CommonTree',
                 'BirchTree', 'BirchTree_Dead',
@@ -288,6 +287,8 @@ class HackNSlashDemo {
 
             const e = new entity.Entity();
             e.AddComponent(new gltf_component.StaticModelComponent({
+
+                // CHECK: 머지 충돌 해결할 때 경로가 .resources/nature/GLTF/라고 되어 있던 걸 지움. 맞는지 체크하기.
                 scene       : this._scene,
                 resourcePath: './resources/nature2/GLTF/',
                 resourceName: 'Cloud' + index + '.glb',
@@ -299,6 +300,34 @@ class HackNSlashDemo {
             this._entityManager.Add(e, 'cloud');
             e.SetActive(false);
         }
+    }
+
+    /**
+     * 맵: 포털
+     */
+    _LoadPortal() {
+        const pos = new THREE.Vector3(
+            (1 * 2.0 - 1.0) * 500 - 100,
+            0,
+            (1 * 2.0 - 1.0) * 500 - 130);
+
+        const e = new entity.Entity();
+        e.AddComponent(new gltf_component.StaticModelComponent({
+            scene        : this._scene,
+            resourcePath : './resources/magic_portal/',
+            resourceName : 'scene.gltf',
+            scale        : 14,
+            emissive     : new THREE.Color(0x000000),
+            specular     : new THREE.Color(0x000000),
+            receiveShadow: true,
+            castShadow   : true,
+        }));
+        e.AddComponent(
+            new spatial_grid_controller.SpatialGridController({grid: this._grid}));
+        e.SetPosition(pos);
+        this._entityManager.Add(e);
+        e.SetActive(false);
+
     }
 
     /**
@@ -321,6 +350,26 @@ class HackNSlashDemo {
         }));
         this._entityManager.Add(levelUpSpawner, 'level-up-spawner');
 
+        /* NPC : 여자 */
+
+        const girl = new entity.Entity();
+        girl.AddComponent(new gltf_component.AnimatedModelComponent({
+            scene            : this._scene,
+            resourcePath     : './resources/girl/',
+            resourceName     : 'peasant_girl.fbx',
+            resourceAnimation: 'Standing Idle.fbx',
+            scale            : 0.035,
+            receiveShadow    : true,
+            castShadow       : true,
+        }));
+        girl.AddComponent(new spatial_grid_controller.SpatialGridController({
+            grid: this._grid,
+        }));
+        girl.AddComponent(new player_input.PickableComponent());
+        girl.AddComponent(new quest_component.QuestComponent());
+        girl.SetPosition(new THREE.Vector3(30, 0, 0));
+        this._entityManager.Add(girl, 'girl');
+
         /* 무기: 검 */
 
         const sword = new entity.Entity();
@@ -336,7 +385,6 @@ class HackNSlashDemo {
         this._entityManager.Add(sword, 'sword');
 
         /* 무기: 도끼 */
-
         const axe = new entity.Entity();
         axe.AddComponent(new inventory_controller.InventoryItem({
             type        : 'weapon',
@@ -354,8 +402,7 @@ class HackNSlashDemo {
         const player = new entity.Entity();
         player.AddComponent(new player_input.BasicCharacterControllerInput(params));
         player.AddComponent(new player_entity.BasicCharacterController(params));
-        player.AddComponent(
-            new equip_weapon_component.EquipWeapon({anchor: 'RightHandIndex1'}));
+        player.AddComponent(new equip_weapon_component.EquipWeapon({anchor: 'mixamorig6RightHandMiddle1'}));
         player.AddComponent(new inventory_controller.InventoryController(params));
         player.AddComponent(new health_component.HealthComponent({
             updateUI  : true,
@@ -440,7 +487,7 @@ class HackNSlashDemo {
         for (let i = 0; i < 20; i++) {
             const tool_Item = [
                 {
-                    resourceName: 'Raft.fbx'
+                    resourceName: 'Radio.fbx'
                 },
                 {
                     resourceName: 'Raft_Paddle.fbx'
@@ -468,6 +515,7 @@ class HackNSlashDemo {
                 }
 
             ];
+
             let m = null;
 
             // 무조건 한 번씩 나올 수 있도록 생성
@@ -542,10 +590,10 @@ class HackNSlashDemo {
             }
 
             this._RAF();
-
             this._threejs.render(this._scene, this._camera);
             this._Step(t - this._previousRAF);
             this._previousRAF = t;
+
         });
     }
 

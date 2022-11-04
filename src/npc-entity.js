@@ -82,7 +82,7 @@ export const npc_entity = (() => {
 
     _LoadModels() {
       const loader = new FBXLoader();
-      loader.setPath('./resources/monsters/FBX/');
+      loader.setPath('./resources/monsters1/FBX/');
       loader.load(this._params.resourceName, (glb) => {
         this._target = glb;
         this._params.scene.add(this._target);
@@ -92,7 +92,7 @@ export const npc_entity = (() => {
         this._target.position.y += 0.35;
         const texLoader = new THREE.TextureLoader();
         const texture = texLoader.load(
-            './resources/monsters/Textures/' + this._params.resourceTexture);
+            './resources/monsters1/Textures/' + this._params.resourceTexture);
         texture.encoding = THREE.sRGBEncoding;
         texture.flipY = true;
 

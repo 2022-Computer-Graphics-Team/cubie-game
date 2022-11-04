@@ -1,11 +1,11 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118.1/build/three.module.js';
-
 import {FBXLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/FBXLoader.js';
 
 import {entity} from '../../src/entity.js';
 import {finite_state_machine} from '../../src/finite-state-machine.js';
 import {player_state} from '../../src/player-state.js';
 
+import {flag} from './map3-object-hp.js';
 
 export const player_entity = (() => {
 
@@ -36,7 +36,6 @@ export const player_entity = (() => {
         }
     }
 
-
     class BasicCharacterController extends entity.Component {
         constructor(params) {
             super();
@@ -65,6 +64,10 @@ export const player_entity = (() => {
 
         _OnDeath(msg) {
             this._stateMachine.SetState('death');
+
+            setTimeout(function() {
+                window.location.replace('../fail_to_map3.html')
+            }, 5000);
         }
 
         /**
@@ -131,6 +134,8 @@ export const player_entity = (() => {
                 loader.load('Sword And Shield Death.fbx', (a) => {
                     _OnLoad('death', a);
                 });
+
+                // FIXME: 추가할지 말지 고민하고 수정하기
                 loader.load('Sword And Shield Jump.fbx', (a) => {
                     _OnLoad('jump', a);
                 })
@@ -157,6 +162,11 @@ export const player_entity = (() => {
                 if (d <= 4) {
                     collisions.push(nearby[i].entity);
                 }
+            }
+            console.log(pos.x + " " + pos.z + " " + flag)
+            if ((pos.x >= 350 && pos.x < 450) && (pos.z >= 350 && pos.z <= 450) && (flag == true)) {
+                // CHECK: 다음 스테이지로 넘어가는 부분
+                window.location.replace('../../end.html')
             }
             return collisions;
         }
@@ -258,7 +268,8 @@ export const player_entity = (() => {
             this._parent.SetPosition(this._position);
             this._parent.SetQuaternion(this._target.quaternion);
         }
-    };
+
+    }
 
     return {
         BasicCharacterControllerProxy: BasicCharacterControllerProxy,

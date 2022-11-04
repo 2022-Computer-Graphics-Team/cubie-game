@@ -29,12 +29,10 @@ export const equip_weapon_component = (() => {
 
         _AttachTarget() {
             if (this._bones && this._target) {
-                console.log('Type of this._bones: ' + typeof(this._bones))
-                console.log('this._target: ' + this._target)
 
                 // CHECK: 기존에 잘 되던 코드가 갑자기 안 됨. (add method)
-                // this._bones[this._params.anchor].add(this._target);
-                this._bones[this._params.anchor] = this._target;
+                this._bones[this._params.anchor].add(this._target);
+                // this._bones[this._params.anchor] = this._target;
             }
         }
 
@@ -67,9 +65,9 @@ export const equip_weapon_component = (() => {
             loader.setPath('../../resources/weapons/FBX/');
             loader.load(item.RenderParams.name + '.fbx', (fbx) => {
                 this._target = fbx;
-                this._target.scale.setScalar(item.RenderParams.scale);
-                this._target.rotateY(Math.PI);
-                this._target.rotateX(-Math.PI / 3);
+                this._target.scale.setScalar(item.RenderParams.scale/1.3);
+                this._target.rotateY(Math.PI / 1.3);
+                this._target.rotateX(Math.PI / 3);
                 this._target.rotateY(-1);
 
                 this._target.traverse(c => {
