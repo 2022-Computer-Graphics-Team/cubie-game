@@ -441,7 +441,7 @@ class Map2 {
                 (Math.random() * 2 - 1) * 500,
                 0,
                 (Math.random() * 2 - 1) * 500));
-            //this._entityManager.Add(npc);
+            this._entityManager.Add(npc);
         }
     }
 
