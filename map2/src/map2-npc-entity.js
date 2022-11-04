@@ -8,9 +8,6 @@ import {health_component} from './map2-object-hp.js';
 import {player_entity} from './map2-player-entity.js'
 
 
-let countd = 0;
-export {countd};
-
 export const npc_entity = (() => {
 
     class AIInput {
@@ -83,11 +80,6 @@ export const npc_entity = (() => {
 
         _OnDeath(msg) {
             this._stateMachine.SetState('death');
-
-            // countd += 1;
-            // 잡은 몬스터 수를 화면에 보여준다.
-            // let mission = document.getElementById('mission-text')
-            // mission.innerHTML = 'You have to kill 10 zombies. (' + countd + '/10)'
         }
 
         _OnPosition(m) {
@@ -293,7 +285,8 @@ export const npc_entity = (() => {
 
             const collisions = this._FindIntersections(pos);
             if (collisions.length > 0) {
-                this._input._keys.space = true;
+                // this._input._keys.space = true;
+                this._input._keys.ctrl = true;
                 this._input._keys.forward = false;
                 return;
             }
@@ -310,7 +303,8 @@ export const npc_entity = (() => {
                 return;
             }
 
-            this._input._keys.space = false;
+            // this._input._keys.space = false;
+            this._input._keys.ctrl = false;
             this._input._keys.forward = false;
 
             this._UpdateAI(timeInSeconds);
