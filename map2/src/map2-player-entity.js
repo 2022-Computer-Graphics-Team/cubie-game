@@ -108,7 +108,7 @@ export const player_entity = (() => {
                     const action = this._mixer.clipAction(clip);
 
                     this._animations[animName] = {
-                        clip: clip,
+                        clip  : clip,
                         action: action,
                     };
                 };
@@ -178,12 +178,12 @@ export const player_entity = (() => {
                 Item._name = "key";
                 Item._parent = this._parent._parent;
                 Item.AddComponent(new inventory_controller.InventoryItem({
-                    type: 'weapon',
-                    damage: 3,
+                    type        : 'weapon',
+                    damage      : 3,
                     renderParams: {
-                        name: "key",
+                        name : "key",
                         scale: 0.25,
-                        icon: "key.png",
+                        icon : "key.png",
                     },
                 }));
                 Item._parent.Add(Item, "key");
@@ -201,12 +201,12 @@ export const player_entity = (() => {
                 Item._name = "treasure";
                 Item._parent = this._parent._parent;
                 Item.AddComponent(new inventory_controller.InventoryItem({
-                    type: 'weapon',
-                    damage: 3,
+                    type        : 'weapon',
+                    damage      : 3,
                     renderParams: {
-                        name: "treasure",
+                        name : "treasure",
                         scale: 0.25,
-                        icon: "treasure.png",
+                        icon : "treasure.png",
                     },
                 }));
                 Item._parent.Add(Item, "treasure");
@@ -223,7 +223,7 @@ export const player_entity = (() => {
             var treasure = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'treasure').length
 
             //console.log(pos.x + " " + pos.z + " " + key + " " + treasure)
-            if (key == 1 && treasure == 1 && (pos.x >= 50 && pos.x < 150) && (pos.z >= 50 && pos.z <= 150)) {
+            if (key >= 1 && treasure >= 1 && (pos.x >= 50 && pos.x < 150) && (pos.z >= 50 && pos.z <= 150)) {
                 // 다음 스테이지로 넘어가는 부분
                 window.location.replace('../../map3/map3.html')
             }
@@ -244,9 +244,9 @@ export const player_entity = (() => {
             }
             if (this._stateMachine._currentState._action) {
                 this.Broadcast({
-                    topic: 'player.action',
+                    topic : 'player.action',
                     action: this._stateMachine._currentState.Name,
-                    time: this._stateMachine._currentState._action.time,
+                    time  : this._stateMachine._currentState._action.time,
                 });
             }
 
@@ -336,7 +336,7 @@ export const player_entity = (() => {
 
     return {
         BasicCharacterControllerProxy: BasicCharacterControllerProxy,
-        BasicCharacterController: BasicCharacterController,
+        BasicCharacterController     : BasicCharacterController,
     };
 
 })();
