@@ -58,7 +58,7 @@ void main() {
 
             this._geometry = new THREE.BufferGeometry();
 
-            // NOTE: 좀비 몬스터 체력바 지우기
+            // 좀비 몬스터 체력바 지우기
             this._bar = new THREE.Mesh(this._geometry, this._material);
             this._bar.frustumCulled = false;
             this._bar.scale.set(2, 0.125, 1);

@@ -124,8 +124,7 @@ class Map2 {
         this._grid = new spatial_hash_grid.SpatialHashGrid(
             [[-1000, -1000], [1000, 1000]], [100, 100]);
 
-        // NOTE: 로딩바를 위해선 _LoadPlayer() 함수가 맨 밑에 와야 함.
-
+        // 로딩바를 위해선 _LoadPlayer() 함수가 맨 밑에 와야 함.
         this._LoadControllers();
         this._LoadPlayer();
         // this._LoadFoliage(); // 나무 지움
@@ -231,7 +230,6 @@ class Map2 {
 
         // 보물상자 열쇠
         // CHECK: 힌트로 여자를 찾으라고 하고 그 여자 가까이 있다고 하는 건 어떤지..
-        // CHECK: 리소스 경로명 제대로 동작하는지 확인하기
         const key = new entity.Entity();
         key.AddComponent(new gltf_component.StaticModelComponent({
             scene          : this._scene,
@@ -347,7 +345,6 @@ class Map2 {
         }
         for (let i = 0; i < 10; ++i) {
 
-            // FIXME: 몬스터를 좀비로 바꾸자!
             const monsters = [
                 {
                     resourceName: 'Zombie_Male.fbx',
@@ -383,7 +380,7 @@ class Map2 {
                 new health_component.HealthComponent({
                     health    : 50,
                     maxHealth : 50,
-                    strength  : 5,
+                    strength  : 3,
                     wisdomness: 2,
                     benchpress: 3,
                     curl      : 1,
