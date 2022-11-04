@@ -25,7 +25,7 @@ export const npc_entity = (() => {
         shift: false,
       };
     }
-  };
+  }
 
   class NPCFSM extends finite_state_machine.FiniteStateMachine {
     constructor(proxy) {
@@ -40,7 +40,7 @@ export const npc_entity = (() => {
       this._AddState('death', player_state.DeathState);
       this._AddState('attack', player_state.AttackState);
     }
-  };
+  }
 
   class NPCController extends entity.Component {
     constructor(params) {
@@ -57,7 +57,6 @@ export const npc_entity = (() => {
 
       this._animations = {};
       this._input = new AIInput();
-      // FIXME
       this._stateMachine = new NPCFSM(
           new player_entity.BasicCharacterControllerProxy(this._animations));
 

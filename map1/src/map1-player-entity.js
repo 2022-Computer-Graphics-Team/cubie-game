@@ -135,12 +135,20 @@ export const player_entity = (() => {
                 loader.load('Sword And Shield Walk.fbx', (a) => {
                     _OnLoad('walk', a);
                 });
-                loader.load('Sword And Shield Slash.fbx', (a) => {
+                loader.load('Stabbing.fbx', (a) => {
                     _OnLoad('attack', a);
                 });
                 loader.load('Sword And Shield Death.fbx', (a) => {
                     _OnLoad('death', a);
                 });
+                loader.load('Picking Up.fbx', (a) => {
+                    _OnLoad('pick', a);
+                });
+                loader.load('Sword And Shield Jump.fbx', (a) => {
+                    _OnLoad('jump', a);
+                });
+
+                loader.load();
             });
         }
 

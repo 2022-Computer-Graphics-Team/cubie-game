@@ -22,6 +22,7 @@ export const npc_key_entity = (() => {
                 left    : false,
                 right   : false,
                 space   : false,
+                control : false,
                 shift   : false,
             };
         }
@@ -40,7 +41,7 @@ export const npc_key_entity = (() => {
             this._AddState('death', player_state.DeathState);
             this._AddState('attack', player_state.AttackState);
         }
-    };
+    }
 
     class NPCController extends entity.Component {
         constructor(params) {

@@ -46,14 +46,13 @@ export const player_state = (() => {
         }
 
         Exit() {
-            // window.location.replace('../fail_to_map1.html')
         }
 
         Update(_) {
         }
     }
 
-    class JumpState extends State {
+    class PickState extends State {
         constructor(parent) {
             super(parent);
 
@@ -65,11 +64,11 @@ export const player_state = (() => {
         }
 
         get Name() {
-            return 'jump';
+            return 'pick';
         }
 
         Enter(prevState) {
-            this._action = this._parent._proxy._animations['jump'].action;
+            this._action = this._parent._proxy._animations['pick'].action;
             const mixer = this._action.getMixer();
             mixer.addEventListener('finished', this._FinishedCallback);
 
@@ -102,12 +101,6 @@ export const player_state = (() => {
         }
 
         Update(_) {
-        }
-
-        Exit() {
-        }
-
-        Update(timeElapsed, input) {
         }
     }
 
@@ -174,6 +167,7 @@ export const player_state = (() => {
 
         Enter(prevState) {
             const curAction = this._parent._proxy._animations['walk'].action;
+
             if (prevState) {
                 const prevAction = this._parent._proxy._animations[prevState.Name].action;
 
@@ -209,7 +203,6 @@ export const player_state = (() => {
             this._parent.SetState('idle');
         }
     }
-
 
     class RunState extends State {
         constructor(parent) {
@@ -269,6 +262,7 @@ export const player_state = (() => {
 
         Enter(prevState) {
             const idleAction = this._parent._proxy._animations['idle'].action;
+
             if (prevState) {
                 const prevAction = this._parent._proxy._animations[prevState.Name].action;
                 idleAction.time = 0.0;
@@ -286,10 +280,13 @@ export const player_state = (() => {
         }
 
         Update(_, input) {
+            // 여기서 키를 추가하면 된다.
             if (input._keys.forward || input._keys.backward) {
                 this._parent.SetState('walk');
-            } else if (input._keys.space) {
+            } else if (input._keys.ctrl) {
                 this._parent.SetState('attack');
+            } else if (input._keys.pick) {
+                this._parent.SetState('pick');
             }
         }
     }
@@ -301,6 +298,6 @@ export const player_state = (() => {
         WalkState  : WalkState,
         RunState   : RunState,
         DeathState : DeathState,
-        JumpState  : JumpState
+        PickState  : PickState
     }
-}) ();
+})();
