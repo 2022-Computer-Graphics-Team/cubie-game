@@ -5,6 +5,7 @@ import {entity} from '../../src/entity.js';
 import {finite_state_machine} from '../../src/finite-state-machine.js';
 import {player_state} from '../../src/player-state.js';
 
+import {flag} from './map3-object-hp.js';
 
 export const player_entity = (() => {
 
@@ -162,6 +163,11 @@ export const player_entity = (() => {
                     collisions.push(nearby[i].entity);
                 }
             }
+            console.log(pos.x + " " + pos.z + " " + flag)
+            if ((pos.x >= 350 && pos.x < 450) && (pos.z >= 350 && pos.z <= 450) && (flag == true)) {
+                // CHECK: 다음 스테이지로 넘어가는 부분
+                window.location.replace('../../end.html')
+            }
             return collisions;
         }
 
@@ -262,6 +268,7 @@ export const player_entity = (() => {
             this._parent.SetPosition(this._position);
             this._parent.SetQuaternion(this._target.quaternion);
         }
+
     }
 
     return {
