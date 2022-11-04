@@ -183,7 +183,7 @@ export const player_entity = (() => {
                     renderParams: {
                         name: "key",
                         scale: 0.25,
-                        icon: "1.png",
+                        icon: "key.png",
                     },
                 }));
                 Item._parent.Add(Item, "key");
@@ -206,7 +206,7 @@ export const player_entity = (() => {
                     renderParams: {
                         name: "treasure",
                         scale: 0.25,
-                        icon: "2.png",
+                        icon: "treasure.png",
                     },
                 }));
                 Item._parent.Add(Item, "treasure");
@@ -222,9 +222,10 @@ export const player_entity = (() => {
             var key = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'key').length
             var treasure = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'treasure').length
 
-            console.log(pos.x + " " + pos.z + " " + key + " " + treasure)
+            //console.log(pos.x + " " + pos.z + " " + key + " " + treasure)
             if (key == 1 && treasure == 1 && (pos.x >= 50 && pos.x < 150) && (pos.z >= 50 && pos.z <= 150)) {
-                console.log("완료")
+                // 다음 스테이지로 넘어가는 부분
+                window.location.replace('../../map3/map3.html')
             }
 
             return collisions;

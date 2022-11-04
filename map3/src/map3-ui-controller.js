@@ -15,42 +15,19 @@ export const ui_controller = (() => {
             };
 
             this._ui.quests.onclick = (m) => {
-                console.log("click quest")
                 this._OnQuestsClicked(m);
             };
 
-            this._iconBar = {
-                map    : document.getElementById('icon-bar-map'),
-            };
-
-            this._ui = {
-                map    : document.getElementById('map'),
-            };
-
-            this._iconBar.map.onclick = (m) => {
-                this._OnStatsClicked(m);
-            };
-            
-            this._HideUI();
         }
 
         AddQuest(quest) {
             if (quest.id in this._quests) {
                 return;
             }
-            // const e = document.createElement('p');
-            // //e.className = 'quest-entry';
-            // e.id = 'quest-entry-' + quest.id;
-            // e.innerText = quest.title;
-            // e.onclick = (evt) => {
-            //     this._OnQuestSelected(e.id);
-            // };
-            // document.getElementById('mission-ui').appendChild(e);
-
 
             this._quests[quest.id] = quest;
             this._OnQuestSelected(quest.id);
-            console.log("add quest")
+            //console.log("add quest")
 
         }
 
@@ -73,20 +50,6 @@ export const ui_controller = (() => {
             this._HideUI();
             this._ui.quests.style.visibility = (visibility ? '' : 'hidden');
         }
-
-        _HideUI() {
-            this._ui.map.style.visibility = 'hidden';
-        }
-
-        _OnStatsClicked(msg) {
-            const visibility = this._ui.map.style.visibility;
-            this._HideUI();
-            this._ui.map.style.visibility = (visibility ? '' : 'hidden');
-        }
-
-
-
-
 
         Update(timeInSeconds) {
         }

@@ -163,7 +163,7 @@ export const player_entity = (() => {
                     collisions.push(nearby[i].entity);
                 }
             }
-            console.log(pos.x + " " + pos.z + " " + flag)
+            //console.log(pos.x + " " + pos.z + " " + flag)
             if ((pos.x >= 350 && pos.x < 450) && (pos.z >= 350 && pos.z <= 450) && (flag == true)) {
                 // CHECK: 다음 스테이지로 넘어가는 부분
                 window.location.replace('../../end.html')

@@ -562,7 +562,6 @@ class HackNSlashDemo {
             let entityName = m.resourceName;
             this._entityManager.Add(tool, entityName);
         }
-        console.log(this)
     }
 
     _OnWindowResize() {
