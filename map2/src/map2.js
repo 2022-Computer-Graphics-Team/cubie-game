@@ -128,6 +128,8 @@ class Map2 {
 
         this._LoadControllers();
         this._LoadPlayer();
+        //this._LoadPortal();
+
         // this._LoadFoliage(); // 나무 지움
         // this._LoadClouds();  // 구름 지움
         // this._LoadSky();
@@ -160,6 +162,37 @@ class Map2 {
         const ui = new entity.Entity();
         ui.AddComponent(new ui_controller.UIController());
         this._entityManager.Add(ui, 'ui');
+    }
+    /**
+     * 맵: 포털
+     */
+    _LoadPortal() {
+        // const pos = new THREE.Vector3(
+        //     (1 * 2.0 - 1.0) * 500 - 100,
+        //     0,
+        //     (1 * 2.0 - 1.0) * 500 - 130);
+        const pos = new THREE.Vector3(
+            0,
+            0,
+            0);
+
+        const e = new entity.Entity();
+        e.AddComponent(new gltf_component.StaticModelComponent({
+            scene        : this._scene,
+            resourcePath : './resources/magic_portal/',
+            resourceName : 'scene.gltf',
+            scale        : 14,
+            emissive     : new THREE.Color(0x000000),
+            specular     : new THREE.Color(0x000000),
+            receiveShadow: true,
+            castShadow   : true,
+        }));
+        e.AddComponent(
+            new spatial_grid_controller.SpatialGridController({grid: this._grid}));
+        e.SetPosition(pos);
+        this._entityManager.Add(e);
+        e.SetActive(false);
+
     }
 
     /**
