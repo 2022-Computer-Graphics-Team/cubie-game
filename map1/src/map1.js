@@ -423,6 +423,8 @@ class Map1 {
 
             // 숫자 키패드 1번을 눌렀을 때 1인칭 시점 카메라로 전환된다.
             if (event.keyCode === 49) {
+                console.log(event.keyCode)
+
                 camera.AddComponent(
                     new first_person_camera.FirstPersonCamera({
                         camera: object._camera,
@@ -433,6 +435,8 @@ class Map1 {
             // 숫자 키패드 2번을 눌렀을 때 3인칭 시점 카메라로 전환된다.
             // FIXME: 이 부분이 잘 안 된다!
             if (event.keyCode === 50) {
+                console.log(event.keyCode)
+
                 camera.AddComponent(
                     new third_person_camera.ThirdPersonCamera({
                         camera: object._camera,
@@ -441,7 +445,7 @@ class Map1 {
             }
         }
 
-        for (let i = 0; i < 100; ++i) {
+        for (let i = 0; i < 10; ++i) {
 
             // FIXME: 몬스터를 좀비로 바꾸자!
             const monsters = [

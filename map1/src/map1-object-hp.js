@@ -41,7 +41,8 @@ export const health_component = (() => {
 
         _ComputeLevelXPRequirement() {
             const level = this._params.level;
-            const xpRequired = Math.round(2 ** (level - 1) * 100);
+            // const xpRequired = Math.round(2 ** (level - 1) * 100);
+            const xpRequired = Math.round(2 ** (1 - 1) * 100);
             return xpRequired;
         }
 

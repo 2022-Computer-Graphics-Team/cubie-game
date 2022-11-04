@@ -17,14 +17,14 @@ export const first_person_camera = (() => {
         }
 
         _CalculateIdealOffset() {
-            const idealOffset = new THREE.Vector3(-0, 10, 5);
+            const idealOffset = new THREE.Vector3(-0, 0, -5);
             idealOffset.applyQuaternion(this._params.target._rotation);
             idealOffset.add(this._params.target._position);
             return idealOffset;
         }
 
         _CalculateIdealLookat() {
-            const idealLookat = new THREE.Vector3(0, 5, 20);
+            const idealLookat = new THREE.Vector3(0, 0, 20);
             idealLookat.applyQuaternion(this._params.target._rotation);
             idealLookat.add(this._params.target._position);
             return idealLookat;
