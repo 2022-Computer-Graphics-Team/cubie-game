@@ -1,0 +1,11 @@
+Model Information:
+* title:	Medieval Modular City Realistic - WIP
+* source:	https://sketchfab.com/3d-models/medieval-modular-city-realistic-wip-49e6306b29c74c679de8cec69473535b
+* author:	Daniel Vicente (https://sketchfab.com/danielvicente97cesur)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Medieval Modular City Realistic - WIP" (https://sketchfab.com/3d-models/medieval-modular-city-realistic-wip-49e6306b29c74c679de8cec69473535b) by Daniel Vicente (https://sketchfab.com/danielvicente97cesur) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
