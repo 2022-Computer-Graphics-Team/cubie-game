@@ -431,12 +431,6 @@ class Map1 {
                         camera: object._camera,
                         target: object._entityManager.Get('player')
                     }));
-
-                // player.Broadcast({
-                //     topic: 'first_person_camera',
-                //     model: this._target,
-                //     bones: this._bones
-                // })
             }
             // FIXME: 이 부분이 잘 안 된다!
             else if (event.keyCode === 50) {
@@ -449,12 +443,6 @@ class Map1 {
                         camera: object._camera,
                         target: object._entityManager.Get('player')
                     }));
-
-                // player.Broadcast({
-                //     topic: 'third_person_camera',
-                //     model: this._target,
-                //     bones: this._bones
-                // })
             }
         }
 
@@ -550,7 +538,6 @@ class Map1 {
 
             this._threejs.render(this._scene, this._camera);
             this._Step(t - this._previousRAF);
-            //mconsole.log(this)
             this._previousRAF = t;
         });
     }
@@ -561,26 +548,6 @@ class Map1 {
         this._UpdateSun();
 
         this._entityManager.Update(timeElapsedS);
-    }
-
-    _SetThirdPersonCamera() {
-        const fov = 60;
-        const aspect = 1920 / 1080;
-        const near = 1.0;
-        const far = 10000.0;
-
-        this._camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-        this._camera.position.set(25, 10, 25);
-    }
-
-    _SetFirstersonCamera() {
-        const fov = 60;
-        const aspect = 1920 / 1080;
-        const near = 1.0;
-        const far = 10000.0;
-
-        this._camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-        this._camera.position.set(0, 10, 0);
     }
 }
 
