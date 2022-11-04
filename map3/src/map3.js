@@ -307,9 +307,9 @@ class HackNSlashDemo {
      */
     _LoadPortal() {
         const pos = new THREE.Vector3(
-            (Math.random() * 2.0 - 1.0) * 500,
+            (1 * 2.0 - 1.0) * 500 - 100,
             0,
-            (Math.random() * 2.0 - 1.0) * 500);
+            (1 * 2.0 - 1.0) * 500 - 130);
 
         const e = new entity.Entity();
         e.AddComponent(new gltf_component.StaticModelComponent({
