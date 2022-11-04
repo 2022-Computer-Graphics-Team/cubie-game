@@ -18,6 +18,20 @@ export const ui_controller = (() => {
                 console.log("click quest")
                 this._OnQuestsClicked(m);
             };
+
+            this._iconBar = {
+                map    : document.getElementById('icon-bar-map'),
+            };
+
+            this._ui = {
+                map    : document.getElementById('map'),
+            };
+
+            this._iconBar.map.onclick = (m) => {
+                this._OnStatsClicked(m);
+            };
+            
+            this._HideUI();
         }
 
         AddQuest(quest) {
@@ -59,6 +73,20 @@ export const ui_controller = (() => {
             this._HideUI();
             this._ui.quests.style.visibility = (visibility ? '' : 'hidden');
         }
+
+        _HideUI() {
+            this._ui.map.style.visibility = 'hidden';
+        }
+
+        _OnStatsClicked(msg) {
+            const visibility = this._ui.map.style.visibility;
+            this._HideUI();
+            this._ui.map.style.visibility = (visibility ? '' : 'hidden');
+        }
+
+
+
+
 
         Update(timeInSeconds) {
         }
