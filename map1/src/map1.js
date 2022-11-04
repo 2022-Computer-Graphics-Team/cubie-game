@@ -421,9 +421,10 @@ class Map1 {
         // FIXME: 키를 눌렀을 때 (1, 2번) 제대로 카메라 전환이 되도록 수정해야 한다.
         function keyDown(event) {
 
-            // 숫자 키패드 1번을 눌렀을 때 1인칭 시점 카메라로 전환된다.
             if (event.keyCode === 49) {
-                console.log(event.keyCode)
+                // 숫자 키패드 1번을 눌렀을 때 1인칭 시점 카메라로 전환된다.
+
+                console.log('49' + event.keyCode)
 
                 camera.AddComponent(
                     new first_person_camera.FirstPersonCamera({
@@ -437,11 +438,11 @@ class Map1 {
                     bones: this._bones
                 })
             }
-
-            // 숫자 키패드 2번을 눌렀을 때 3인칭 시점 카메라로 전환된다.
             // FIXME: 이 부분이 잘 안 된다!
-            if (event.keyCode === 50) {
-                console.log(event.keyCode)
+            else if (event.keyCode === 50) {
+                // 숫자 키패드 2번을 눌렀을 때 3인칭 시점 카메라로 전환된다.
+
+                console.log('50' + event.keyCode)
 
                 camera.AddComponent(
                     new third_person_camera.ThirdPersonCamera({
