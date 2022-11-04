@@ -136,14 +136,16 @@ class Map2 {
 
         // Map2 코드 - 중세 모델 올리기
         const e1 = new entity.Entity();
-        var pos = new THREE.Vector3(1900, 0, 100)
+        var pos = new THREE.Vector3(300, -10, -500)
         e1.AddComponent(new gltf_component.StaticModelComponent({
             scene       : this._scene,
-            resourcePath: './resources/medieval_modular_city_realistic/',
-            resourceName: 'scene.gltf',
-            scale       : // Math.random() * 5 + 10,
-                10,
+            resourcePath: './resources/dragon_attack_aftermath/',
+            resourceName: 'scene.gltf', 
+            scale       : 20,
             position    : pos,
+            
+            receiveShadow: true,
+            castShadow   : true,
         }));
         e1.SetPosition(pos);
         this._entityManager.Add(e1);
@@ -216,15 +218,15 @@ class Map2 {
             resourceName     : 'peasant_girl.fbx',
             resourceAnimation: 'Standing Idle.fbx',
             scale            : 0.035,
-            receiveShadow    : true,
-            castShadow       : true,
+            receiveShadow    : false,
+            castShadow       : false,
         }));
         girl.AddComponent(new spatial_grid_controller.SpatialGridController({
             grid: this._grid,
         }));
         girl.AddComponent(new player_input.PickableComponent());
         girl.AddComponent(new quest_component.QuestComponent());
-        girl.SetPosition(new THREE.Vector3(30, 0, 0));
+        girl.SetPosition(new THREE.Vector3(230, 0, -400));
         this._entityManager.Add(girl);
 
         // 보물상자 열쇠
@@ -245,8 +247,29 @@ class Map2 {
         }));
         key.AddComponent(new player_input.PickableComponent());
         key.AddComponent(new quest_component.QuestComponent());
-        key.SetPosition(new THREE.Vector3(35, 0, 0));
+        key.SetPosition(new THREE.Vector3(330, -3, -520));
         this._entityManager.Add(key);
+
+        // 보물상자
+        const treasure = new entity.Entity();
+        treasure.AddComponent(new gltf_component.StaticModelComponent({
+            scene          : this._scene,
+            resourcePath   : './resources/treasure_chest/',
+            resourceName   : 'scene.gltf',
+            // resourceTexture: './resources/key/textures/key_normal.png',
+            scale          : 0.35,
+            receiveShadow  : true,
+            castShadow     : true,
+        }));
+        treasure.AddComponent(new spatial_grid_controller.SpatialGridController({
+            grid: this._grid,
+        }));
+        treasure.AddComponent(new player_input.PickableComponent());
+        treasure.AddComponent(new quest_component.QuestComponent());
+        treasure.SetPosition(new THREE.Vector3(330, -3, -480));
+        this._entityManager.Add(treasure);
+
+
 
         /* 캐릭터 */
 

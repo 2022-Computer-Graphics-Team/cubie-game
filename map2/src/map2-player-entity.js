@@ -86,8 +86,8 @@ export const player_entity = (() => {
                 }
 
                 this._target.traverse(c => {
-                    c.castShadow = true;
-                    c.receiveShadow = true;
+                    c.castShadow = false;
+                    c.receiveShadow = false;
                     if (c.material && c.material.map) {
                         c.material.map.encoding = THREE.sRGBEncoding;
                     }
