@@ -57,7 +57,6 @@ export const npc_key_entity = (() => {
 
             this._animations = {};
             this._input = new AIInput();
-            // FIXME
             this._stateMachine = new NPCFSM(
                 new player_entity.BasicCharacterControllerProxy(this._animations));
 

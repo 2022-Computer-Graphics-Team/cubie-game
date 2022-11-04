@@ -15,7 +15,7 @@ export const inventory_controller = (() => {
 
             this._inventory = {};
 
-            // NOTE: 인벤토리 개수를 16개로 제한
+            // 인벤토리 개수를 16개로 제한
             for (let i = 1; i <= 16; ++i) {
                 this._inventory['inventory-' + i] = {
                     type : 'inventory',
@@ -23,7 +23,7 @@ export const inventory_controller = (() => {
                 };
             }
 
-            // CHECK: 무기 변경 없앤다는 가정 하에 주석 처리
+            // 무기 변경 없앤다는 가정 하에 주석 처리
             /*
               for (let i = 1; i <= 8; ++i) {
                   this._inventory['inventory-equip-' + i] = {

@@ -127,7 +127,7 @@ class Map1 {
         this._grid = new spatial_hash_grid.SpatialHashGrid(
             [[-1000, -1000], [1000, 1000]], [100, 100]);
 
-        // NOTE: 로딩바를 위해선 _LoadPlayer() 함수가 맨 밑에 와야 함.
+        // 로딩바를 위해선 _LoadPlayer() 함수가 맨 밑에 와야 함.
         this._LoadControllers();
         this._LoadFoliage();
         this._LoadClouds();
@@ -430,6 +430,12 @@ class Map1 {
                         camera: object._camera,
                         target: object._entityManager.Get('player')
                     }));
+
+                player.Broadcast({
+                    topic: 'first_person_camera',
+                    model: this._target,
+                    bones: this._bones
+                })
             }
 
             // 숫자 키패드 2번을 눌렀을 때 3인칭 시점 카메라로 전환된다.
@@ -442,12 +448,17 @@ class Map1 {
                         camera: object._camera,
                         target: object._entityManager.Get('player')
                     }));
+
+                player.Broadcast({
+                    topic: 'third_person_camera',
+                    model: this._target,
+                    bones: this._bones
+                })
             }
         }
 
         for (let i = 0; i < 10; ++i) {
 
-            // FIXME: 몬스터를 좀비로 바꾸자!
             const monsters = [
                 {
                     resourceName: 'Zombie_Male.fbx',

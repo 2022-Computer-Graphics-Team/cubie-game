@@ -17,7 +17,7 @@ export const first_person_camera = (() => {
         }
 
         _CalculateIdealOffset() {
-            const idealOffset = new THREE.Vector3(-0, 0, -5);
+            const idealOffset = new THREE.Vector3(-0, 5, 7);
             idealOffset.applyQuaternion(this._params.target._rotation);
             idealOffset.add(this._params.target._position);
             return idealOffset;

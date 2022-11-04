@@ -34,7 +34,7 @@ export const health_component = (() => {
 
             const healthAsPercentage = this._health / this._maxHealth;
 
-            // NOTE: HP 조절 (공격 받으면 HP가 줄어들게끔)
+            // HP 조절 (공격 받으면 HP가 줄어들게끔)
             // bar.style.width = Math.floor(200 * healthAsPercentage) + 'px';
             bar.style.width = Math.floor(960 * healthAsPercentage) + 'px';
         }

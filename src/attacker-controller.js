@@ -7,6 +7,8 @@ import {math} from './math.js';
 
 export const attack_controller = (() => {
 
+    let flag_camera;
+
     class AttackController extends entity.Component {
         constructor(params) {
             super();
@@ -16,6 +18,16 @@ export const attack_controller = (() => {
         }
 
         InitComponent() {
+            // 1인칭 카메라 시점 (테스트)
+            this._RegisterHandler('first_person_camera', (m) => {
+                flag_camera = 1;
+            });
+
+            // 3인칭 카메라 시점 (테스트)
+            this._RegisterHandler('third_person_camera', (m) => {
+                flag_camera = 2;
+            });
+
             this._RegisterHandler('player.action', (m) => {
                 this._OnAnimAction(m);
             });
@@ -64,10 +76,20 @@ export const attack_controller = (() => {
                     const dirToTarget = target._position.clone().sub(this._parent._position);
                     dirToTarget.normalize();
 
-                    const forward = new THREE.Vector3(0, 0, 30);
-                    // const forward = new THREE.Vector3(0, 0, 5);
-                    forward.applyQuaternion(this._parent._rotation);
-                    forward.normalize();
+                    let forward;
+                    if (flag_camera === 1) {
+                        console.log(flag_camera)
+                        forward = new THREE.Vector3(0, 0, 10);
+                        // const forward = new THREE.Vector3(0, 0, 5);
+                        forward.applyQuaternion(this._parent._rotation);
+                        forward.normalize();
+                    } else {
+                        console.log(flag_camera)
+                        forward = new THREE.Vector3(0, 0, 30);
+                        // const forward = new THREE.Vector3(0, 0, 5);
+                        forward.applyQuaternion(this._parent._rotation);
+                        forward.normalize();
+                    }
 
                     let damage = this.GetComponent('HealthComponent')._params.strength;
                     if (item) {
@@ -77,7 +99,7 @@ export const attack_controller = (() => {
 
                     const dot = forward.dot(dirToTarget);
                     if (math.in_range(dot, 0.9, 1.1)) {
-                    // if (math.in_range(dot, 0.9, 2.0)) {
+                        // if (math.in_range(dot, 0.9, 2.0)) {
                         target.Broadcast({
                             topic   : 'health.damage',
                             value   : damage,

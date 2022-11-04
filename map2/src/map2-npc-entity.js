@@ -86,7 +86,7 @@ export const npc_entity = (() => {
             countd += 1;
 
 
-            // NOTE: 잡은 몬스터 수를 화면에 보여준다.
+            // 잡은 몬스터 수를 화면에 보여준다.
             let mission = document.getElementById('mission-text')
             mission.innerHTML = 'You have to kill 10 zombies. (' + countd + '/10)'
         }
@@ -101,7 +101,6 @@ export const npc_entity = (() => {
         _LoadModels() {
             const loader = new FBXLoader();
 
-            // CHECK: resources/monster
             loader.setPath('../../resources/zombie/');
             loader.load(this._params.resourceName, (glb) => {
                 this._target = glb;

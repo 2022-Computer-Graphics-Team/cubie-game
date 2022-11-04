@@ -117,7 +117,7 @@ export const player_entity = (() => {
                 this._manager.onLoad = () => {
                     this._stateMachine.SetState('idle');
 
-                    // NOTE: 여기서 모든 FBX 로드가 끝났다고 보고 진행하기
+                    // 여기서 모든 FBX 로드가 끝났다고 보고 진행하기
                     document.getElementById('loading').style.visibility = 'hidden';
                     document.getElementById('loading').style.display = 'none';
                     document.getElementById('ui').style.visibility = 'visible';
@@ -167,7 +167,7 @@ export const player_entity = (() => {
             }
 
             if ((pos.x >= 350 && pos.x < 450) && (pos.z >= 368 && pos.z <= 380) && (countd >= 10)) {
-                // CHECK: 다음 스테이지로 넘어가는 부분
+                // 다음 스테이지로 넘어가는 부분
                 window.location.replace('../../map2/map2.html')
             }
             return collisions;
