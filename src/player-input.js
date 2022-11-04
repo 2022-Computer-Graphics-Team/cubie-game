@@ -40,6 +40,7 @@ export const player_input = (() => {
                 shift   : false,
                 camera  : false,
                 pick    : false,
+                space   : false,
             };
             this._raycaster = new THREE.Raycaster();
             document.addEventListener('keydown', (e) => this._onKeyDown(e), false);

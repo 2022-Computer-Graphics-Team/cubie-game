@@ -25,6 +25,7 @@ export const npc_entity = (() => {
                 right   : false,
                 space   : false,
                 shift   : false,
+                ctrl    : false,
             };
         }
     }
@@ -284,7 +285,8 @@ export const npc_entity = (() => {
 
             const collisions = this._FindIntersections(pos);
             if (collisions.length > 0) {
-                this._input._keys.space = true;
+                // this._input._keys.space = true;
+                this._input._keys.ctrl = true;
                 this._input._keys.forward = false;
                 return;
             }
@@ -301,7 +303,8 @@ export const npc_entity = (() => {
                 return;
             }
 
-            this._input._keys.space = false;
+            // this._input._keys.space = false;
+            this._input._keys.ctrl = false;
             this._input._keys.forward = false;
 
             this._UpdateAI(timeInSeconds);
