@@ -80,7 +80,7 @@ export const quest_component = (() => {
             const ui = this.FindEntity('ui').GetComponent('UIController');
             ui.AddQuest(quest);
         }
-    };
+    }
 
     return {
         QuestComponent: QuestComponent,
