@@ -18,7 +18,6 @@ import {spatial_hash_grid} from '../../src/spatial-hash-grid.js';
 import {equip_weapon_component} from './map2-equip-weapon-component.js';
 import {quest_component} from './map2-mission-component.js';
 import {npc_entity} from './map2-npc-entity.js';
-import {npc_key_entity} from './map2-npc-key-entity.js';
 import {health_component} from './map2-object-hp.js';
 import {player_entity} from './map2-player-entity.js';
 import {ui_controller} from './map2-ui-controller.js';
@@ -269,9 +268,11 @@ class Map2 {
             resourcePath   : './resources/key/source/',
             resourceName   : 'ancient_key.fbx',
             resourceTexture: './resources/key/textures/key_normal.png',
-            scale          : 0.35,
+            scale          : 0.7,
             receiveShadow  : true,
             castShadow     : true,
+
+
         }));
         key.AddComponent(new spatial_grid_controller.SpatialGridController({
             grid: this._grid,
@@ -436,7 +437,7 @@ class Map2 {
                 (Math.random() * 2 - 1) * 500,
                 0,
                 (Math.random() * 2 - 1) * 500));
-            this._entityManager.Add(npc);
+            //this._entityManager.Add(npc);
         }
     }
 

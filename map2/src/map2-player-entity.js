@@ -5,7 +5,6 @@ import {finite_state_machine} from '../../src/finite-state-machine.js';
 import {entity} from '../../src/entity.js';
 import {player_state} from '../../src/player-state.js';
 
-
 export const player_entity = (() => {
 
     class CharacterFSM extends finite_state_machine.FiniteStateMachine {
@@ -169,6 +168,10 @@ export const player_entity = (() => {
                     collisions.push(nearby[i].entity);
                 }
             }
+
+            //console.log(pos.x + " " + pos.z + " ")
+            //console.log(this._stateMachine._currentState.Name)
+
             return collisions;
         }
 
@@ -183,7 +186,6 @@ export const player_entity = (() => {
             if (this._mixer) {
                 this._mixer.update(timeInSeconds);
             }
-
             if (this._stateMachine._currentState._action) {
                 this.Broadcast({
                     topic : 'player.action',
@@ -193,11 +195,13 @@ export const player_entity = (() => {
             }
 
             const currentState = this._stateMachine._currentState;
+            console.log(this._stateMachine._currentState.Name)
             if (currentState.Name != 'walk' &&
                 currentState.Name != 'run' &&
                 currentState.Name != 'idle') {
                 return;
             }
+
 
             const velocity = this._velocity;
             const frameDecceleration = new THREE.Vector3(
