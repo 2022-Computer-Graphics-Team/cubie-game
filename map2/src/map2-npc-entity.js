@@ -4,9 +4,12 @@ import {FBXLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm
 import {entity} from '../../src/entity.js';
 import {finite_state_machine} from '../../src/finite-state-machine.js';
 import {player_state} from '../../src/player-state.js';
-
+import { health_component } from './map2-object-hp.js';
 import {player_entity} from './map2-player-entity.js'
 
+
+let countd = 0;
+export {countd};
 
 export const npc_entity = (() => {
 
@@ -17,6 +20,7 @@ export const npc_entity = (() => {
         }
 
         _Init() {
+
             this._keys = {
                 forward : false,
                 backward: false,
@@ -41,9 +45,10 @@ export const npc_entity = (() => {
             this._AddState('death', player_state.DeathState);
             this._AddState('attack', player_state.AttackState);
         }
-    };
+    }
 
     class NPCController extends entity.Component {
+
         constructor(params) {
             super();
             this._Init(params);
@@ -58,7 +63,7 @@ export const npc_entity = (() => {
 
             this._animations = {};
             this._input = new AIInput();
-            // FIXME
+
             this._stateMachine = new NPCFSM(
                 new player_entity.BasicCharacterControllerProxy(this._animations));
 
@@ -74,8 +79,16 @@ export const npc_entity = (() => {
             });
         }
 
+
         _OnDeath(msg) {
             this._stateMachine.SetState('death');
+        
+            countd += 1;
+
+
+            // NOTE: 잡은 몬스터 수를 화면에 보여준다.
+            let mission = document.getElementById('mission-text')
+            mission.innerHTML = 'You have to kill 10 zombies. (' + countd + '/10)'
         }
 
         _OnPosition(m) {
@@ -88,15 +101,17 @@ export const npc_entity = (() => {
         _LoadModels() {
             const loader = new FBXLoader();
 
-          // CHECK: resources/monster
-          loader.setPath('../../resources/monsters1/FBX/');
+            // CHECK: resources/monster
+            loader.setPath('../../resources/zombie/');
             loader.load(this._params.resourceName, (glb) => {
                 this._target = glb;
                 this._params.scene.add(this._target);
 
-                this._target.scale.setScalar(0.025);
+                this._target.scale.setScalar(0.02);
                 this._target.position.copy(this._parent._position);
                 this._target.position.y += 0.35;
+
+                /*
                 const texLoader = new THREE.TextureLoader();
                 const texture = texLoader.load(
                     '../../resources/monsters1/Textures/' + this._params.resourceTexture);
@@ -111,6 +126,7 @@ export const npc_entity = (() => {
                         c.material.side = THREE.DoubleSide;
                     }
                 });
+               */
 
                 this._mixer = new THREE.AnimationMixer(this._target);
 
@@ -132,7 +148,7 @@ export const npc_entity = (() => {
                 this._animations['idle'] = _FindAnim('Idle');
                 this._animations['walk'] = _FindAnim('Walk');
                 this._animations['death'] = _FindAnim('Death');
-                this._animations['attack'] = _FindAnim('Bite_Front');
+                this._animations['attack'] = _FindAnim('Punch');
 
                 this._stateMachine.SetState('idle');
             });
@@ -209,6 +225,8 @@ export const npc_entity = (() => {
             }
 
             if (currentState.Name == 'death') {
+
+                console.log("Dead!")
                 return;
             }
 
