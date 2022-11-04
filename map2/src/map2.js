@@ -108,12 +108,19 @@ class Map2 {
 
         /* 텍스처 */
 
-        // 초록색 땅 겹쳐 보이는 거 지움
-        // const plane = new THREE.Mesh(
-        //     new THREE.PlaneGeometry(5000, 5000, 10, 10),
-        //     new THREE.MeshStandardMaterial({
-        //         color: 0x1e601c,
-        //       }));
+        // var plane = new THREE.Mesh(new THREE.PlaneGeometry(3000, 3000, 0, 0));
+        // const textureLoader = new THREE.TextureLoader();
+        // textureLoader.load('./resources/medieval_modular_city_realistic/textures/lambert16SG_baseColor.png',
+        //     function (texture) {
+        //         plane.material = new THREE.MeshStandardMaterial({map: texture})
+        //         plane.material.map.repeat.x = 300;
+        //         plane.material.map.repeat.y = 300;
+        //         plane.material.map.wrapS = THREE.RepeatWrapping;
+        //         plane.material.map.wrapT = THREE.RepeatWrapping;
+        //     }
+        // )
+        //
+        //
         // plane.castShadow = false;
         // plane.receiveShadow = true;
         // plane.rotation.x = -Math.PI / 2;
@@ -126,7 +133,7 @@ class Map2 {
         // 로딩바를 위해선 _LoadPlayer() 함수가 맨 밑에 와야 함.
         this._LoadControllers();
         this._LoadPlayer();
-        //this._LoadPortal();
+        this._LoadPortal();
 
         // this._LoadFoliage(); // 나무 지움
         // this._LoadClouds();  // 구름 지움
@@ -138,14 +145,14 @@ class Map2 {
         const e1 = new entity.Entity();
         var pos = new THREE.Vector3(300, -10, -500)
         e1.AddComponent(new gltf_component.StaticModelComponent({
-            scene       : this._scene,
+            scene: this._scene,
             resourcePath: './resources/dragon_attack_aftermath/',
-            resourceName: 'scene.gltf', 
-            scale       : 20,
-            position    : pos,
-            
+            resourceName: 'scene.gltf',
+            scale: 20,
+            position: pos,
+
             receiveShadow: true,
-            castShadow   : true,
+            castShadow: true,
         }));
         e1.SetPosition(pos);
         this._entityManager.Add(e1);
@@ -163,6 +170,7 @@ class Map2 {
         ui.AddComponent(new ui_controller.UIController());
         this._entityManager.Add(ui, 'ui');
     }
+
     /**
      * 맵: 포털
      */
@@ -172,20 +180,20 @@ class Map2 {
         //     0,
         //     (1 * 2.0 - 1.0) * 500 - 130);
         const pos = new THREE.Vector3(
+            100,
             0,
-            0,
-            0);
+            100);
 
         const e = new entity.Entity();
         e.AddComponent(new gltf_component.StaticModelComponent({
-            scene        : this._scene,
-            resourcePath : './resources/magic_portal/',
-            resourceName : 'scene.gltf',
-            scale        : 14,
-            emissive     : new THREE.Color(0x000000),
-            specular     : new THREE.Color(0x000000),
+            scene: this._scene,
+            resourcePath: './resources/magic_portal/',
+            resourceName: 'scene.gltf',
+            scale: 14,
+            emissive: new THREE.Color(0x000000),
+            specular: new THREE.Color(0x000000),
             receiveShadow: true,
-            castShadow   : true,
+            castShadow: true,
         }));
         e.AddComponent(
             new spatial_grid_controller.SpatialGridController({grid: this._grid}));
@@ -201,7 +209,7 @@ class Map2 {
     _LoadPlayer() {
         const params = {
             camera: this._camera,
-            scene : this._scene,
+            scene: this._scene,
         };
 
         /* 레벨업 효과 파티클 */
@@ -209,7 +217,7 @@ class Map2 {
         const levelUpSpawner = new entity.Entity();
         levelUpSpawner.AddComponent(new level_up_component.LevelUpComponentSpawner({
             camera: this._camera,
-            scene : this._scene,
+            scene: this._scene,
         }));
         this._entityManager.Add(levelUpSpawner, 'level-up-spawner');
 
@@ -217,40 +225,40 @@ class Map2 {
 
         const axe = new entity.Entity();
         axe.AddComponent(new inventory_controller.InventoryItem({
-            type        : 'weapon',
-            damage      : 3,
+            type: 'weapon',
+            damage: 3,
             renderParams: {
-                name : 'Axe',
+                name: 'Axe',
                 scale: 0.25,
-                icon : 'war-axe-64.png',
+                icon: 'war-axe-64.png',
             },
         }));
-        this._entityManager.Add(axe);
+        this._entityManager.Add(axe, 'axe.fbx');
 
         /* 무기: 검 */
 
         const sword = new entity.Entity();
         sword.AddComponent(new inventory_controller.InventoryItem({
-            type        : 'weapon',
-            damage      : 3,
+            type: 'weapon',
+            damage: 3,
             renderParams: {
-                name : 'Sword',
+                name: 'Sword',
                 scale: 0.25,
-                icon : 'pointy-sword-64.png',
+                icon: 'pointy-sword-64.png',
             },
         }));
-        this._entityManager.Add(sword);
+        this._entityManager.Add(sword, 'sword.fbx');
 
         // 주인공 옆에 있는 여자
         const girl = new entity.Entity();
         girl.AddComponent(new gltf_component.AnimatedModelComponent({
-            scene            : this._scene,
-            resourcePath     : './resources/girl/',
-            resourceName     : 'peasant_girl.fbx',
+            scene: this._scene,
+            resourcePath: './resources/girl/',
+            resourceName: 'peasant_girl.fbx',
             resourceAnimation: 'Standing Idle.fbx',
-            scale            : 0.035,
-            receiveShadow    : false,
-            castShadow       : false,
+            scale: 0.035,
+            receiveShadow: false,
+            castShadow: false,
         }));
         girl.AddComponent(new spatial_grid_controller.SpatialGridController({
             grid: this._grid,
@@ -258,21 +266,18 @@ class Map2 {
         girl.AddComponent(new player_input.PickableComponent());
         girl.AddComponent(new quest_component.QuestComponent());
         girl.SetPosition(new THREE.Vector3(230, 0, -400));
-        this._entityManager.Add(girl);
+        this._entityManager.Add(girl, 'girl');
 
         // 보물상자 열쇠
         // CHECK: 힌트로 여자를 찾으라고 하고 그 여자 가까이 있다고 하는 건 어떤지..
         const key = new entity.Entity();
         key.AddComponent(new gltf_component.StaticModelComponent({
-            scene          : this._scene,
-            resourcePath   : './resources/key/source/',
-            resourceName   : 'ancient_key.fbx',
-            resourceTexture: './resources/key/textures/key_normal.png',
-            scale          : 0.7,
-            receiveShadow  : true,
-            castShadow     : true,
-
-
+            scene: this._scene,
+            resourcePath: './resources/key/source/',
+            resourceName: 'ancient_key.fbx',
+            scale: 0.7,
+            receiveShadow: true,
+            castShadow: true,
         }));
         key.AddComponent(new spatial_grid_controller.SpatialGridController({
             grid: this._grid,
@@ -280,18 +285,17 @@ class Map2 {
         key.AddComponent(new player_input.PickableComponent());
         key.AddComponent(new quest_component.QuestComponent());
         key.SetPosition(new THREE.Vector3(330, -3, -520));
-        this._entityManager.Add(key);
+        this._entityManager.Add(key, 'key.fbx');
 
         // 보물상자
         const treasure = new entity.Entity();
         treasure.AddComponent(new gltf_component.StaticModelComponent({
-            scene          : this._scene,
-            resourcePath   : './resources/treasure_chest/',
-            resourceName   : 'scene.gltf',
-            // resourceTexture: './resources/key/textures/key_normal.png',
-            scale          : 0.35,
-            receiveShadow  : true,
-            castShadow     : true,
+            scene: this._scene,
+            resourcePath: './resources/treasure_chest/',
+            resourceName: 'scene.gltf',
+            scale: 0.35,
+            receiveShadow: true,
+            castShadow: true,
         }));
         treasure.AddComponent(new spatial_grid_controller.SpatialGridController({
             grid: this._grid,
@@ -299,8 +303,7 @@ class Map2 {
         treasure.AddComponent(new player_input.PickableComponent());
         treasure.AddComponent(new quest_component.QuestComponent());
         treasure.SetPosition(new THREE.Vector3(330, -3, -480));
-        this._entityManager.Add(treasure);
-
+        this._entityManager.Add(treasure, 'treasure.fbx');
 
 
         /* 캐릭터 */
@@ -311,15 +314,15 @@ class Map2 {
         player.AddComponent(new equip_weapon_component.EquipWeapon({anchor: 'mixamorig6RightHandMiddle1'}));
         player.AddComponent(new inventory_controller.InventoryController(params));
         player.AddComponent(new health_component.HealthComponent({
-            updateUI  : true,
-            health    : 100,
-            maxHealth : 100,
-            strength  : 50,
+            updateUI: true,
+            health: 100,
+            maxHealth: 100,
+            strength: 50,
             wisdomness: 5,
             benchpress: 20,
-            curl      : 100,
+            curl: 100,
             experience: 0,
-            level     : 1,
+            level: 1,
         }));
         player.AddComponent(
             new spatial_grid_controller.SpatialGridController({grid: this._grid}));
@@ -377,6 +380,7 @@ class Map2 {
                     }));
             }
         }
+
         for (let i = 0; i < 10; ++i) {
 
             const monsters = [
@@ -403,24 +407,24 @@ class Map2 {
 
             const npc = new entity.Entity();
             npc.AddComponent(new npc_entity.NPCController({
-                camera      : this._camera,
-                scene       : this._scene,
+                camera: this._camera,
+                scene: this._scene,
                 resourceName: m.resourceName,
                 resourcePath: m.resourcePath,
             }));
 
             npc.AddComponent(
                 new health_component.HealthComponent({
-                    health    : 50,
-                    maxHealth : 50,
-                    strength  : 3,
+                    health: 50,
+                    maxHealth: 50,
+                    strength: 3,
                     wisdomness: 2,
                     benchpress: 3,
-                    curl      : 1,
+                    curl: 1,
                     experience: 0,
-                    level     : 1,
-                    camera    : this._camera,
-                    scene     : this._scene,
+                    level: 1,
+                    camera: this._camera,
+                    scene: this._scene,
                 }));
 
             npc.AddComponent(
