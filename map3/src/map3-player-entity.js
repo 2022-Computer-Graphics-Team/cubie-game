@@ -115,6 +115,12 @@ export const player_entity = (() => {
                 this._manager = new THREE.LoadingManager();
                 this._manager.onLoad = () => {
                     this._stateMachine.SetState('idle');
+
+                    // 여기서 모든 FBX 로드가 끝났다고 보고 진행하기
+                    document.getElementById('loading').style.visibility = 'hidden';
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('ui').style.visibility = 'visible';
+                    document.getElementById('ui').style.display = 'initial';
                 };
 
                 const loader = new FBXLoader(this._manager);

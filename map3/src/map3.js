@@ -53,6 +53,10 @@ class HackNSlashDemo {
     }
 
     _Initialize() {
+        // 로딩바만을 보여주기 위해 나머지 레이아웃을 숨긴다.
+        document.getElementById('ui').style.visibility = 'hidden';
+        document.getElementById('ui').style.display = 'none';
+
         this._threejs = new THREE.WebGLRenderer({
             antialias: true,
         });
