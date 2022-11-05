@@ -135,7 +135,7 @@ export const player_entity = (() => {
                 loader.load('Sword And Shield Walk.fbx', (a) => {
                     _OnLoad('walk', a);
                 });
-                loader.load('Stabbing.fbx', (a) => {
+                loader.load('Sword And Shield Slash.fbx', (a) => {
                     _OnLoad('attack', a);
                 });
                 loader.load('Sword And Shield Death.fbx', (a) => {
@@ -173,7 +173,7 @@ export const player_entity = (() => {
             }
 
             //console.log(pos.x + " " + pos.z + " " + pickFlag)
-            if ((pos.x >= 300 && pos.x < 400) && (pos.z >= -550 && pos.z <= -500) && (pickFlag == true)) {
+            if ((pos.x >= 350 && pos.x < 400) && (pos.z >= -325 && pos.z <= -275) && (pickFlag == true)) {
                 let Item = new entity.Entity();
                 Item._name = "key";
                 Item._parent = this._parent._parent;
@@ -196,7 +196,7 @@ export const player_entity = (() => {
                 pickFlag = false;
             }
 
-            if ((pos.x >= 300 && pos.x < 400) && (pos.z >= -500 && pos.z <= -470) && (pickFlag == true)) {
+            if ((pos.x >= 400 && pos.x < 450) && (pos.z >= -420 && pos.z <= -370) && (pickFlag == true)) {
                 let Item = new entity.Entity();
                 Item._name = "treasure";
                 Item._parent = this._parent._parent;
@@ -223,7 +223,7 @@ export const player_entity = (() => {
             var treasure = this._parent._parent.Filter((entityItem = this._parent._entities) => entityItem._name == 'treasure').length
 
             //console.log(pos.x + " " + pos.z + " " + key + " " + treasure)
-            if (key >= 1 && treasure >= 1 && (pos.x >= 50 && pos.x < 150) && (pos.z >= 50 && pos.z <= 150)) {
+            if (key >= 1 && treasure >= 1 && (pos.x >= 500 && pos.x < 550) && (pos.z >= -480 && pos.z <= -450)) {
                 // 다음 스테이지로 넘어가는 부분
                 window.location.replace('../../map3/map3.html')
             }

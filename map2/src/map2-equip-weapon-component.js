@@ -70,8 +70,8 @@ export const equip_weapon_component = (() => {
                 this._target.rotateY(-1);
 
                 this._target.traverse(c => {
-                    c.castShadow = true;
-                    c.receiveShadow = true;
+                    c.castShadow = false;
+                    c.receiveShadow = false;
                 });
 
                 cb();
