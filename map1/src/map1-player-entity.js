@@ -23,6 +23,7 @@ export const player_entity = (() => {
             this._AddState('run', player_state.RunState);
             this._AddState('attack', player_state.AttackState);
             this._AddState('death', player_state.DeathState);
+            this._AddState('pick', player_state.PickState);
         }
     }
 
