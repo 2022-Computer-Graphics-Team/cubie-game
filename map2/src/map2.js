@@ -143,7 +143,7 @@ class Map2 {
 
         // Map2 코드 - 중세 모델 올리기
         const e1 = new entity.Entity();
-        var pos = new THREE.Vector3(300, -10, -500)
+        var pos = new THREE.Vector3(300, -5, -500)
         e1.AddComponent(new gltf_component.StaticModelComponent({
             scene: this._scene,
             resourcePath: './resources/dragon_attack_aftermath/',
@@ -179,10 +179,7 @@ class Map2 {
         //     (1 * 2.0 - 1.0) * 500 - 100,
         //     0,
         //     (1 * 2.0 - 1.0) * 500 - 130);
-        const pos = new THREE.Vector3(
-            100,
-            0,
-            100);
+        const pos = new THREE.Vector3(530, -1, -470);
 
         const e = new entity.Entity();
         e.AddComponent(new gltf_component.StaticModelComponent({
@@ -265,26 +262,25 @@ class Map2 {
         }));
         girl.AddComponent(new player_input.PickableComponent());
         girl.AddComponent(new quest_component.QuestComponent());
-        girl.SetPosition(new THREE.Vector3(230, 0, -400));
+        girl.SetPosition(new THREE.Vector3(600, 5, -470));
         this._entityManager.Add(girl, 'girl');
 
         // 보물상자 열쇠
-        // CHECK: 힌트로 여자를 찾으라고 하고 그 여자 가까이 있다고 하는 건 어떤지..
         const key = new entity.Entity();
         key.AddComponent(new gltf_component.StaticModelComponent({
             scene: this._scene,
             resourcePath: './resources/key/source/',
             resourceName: 'ancient_key.fbx',
             scale: 0.7,
-            receiveShadow: true,
-            castShadow: true,
+            receiveShadow: false,
+            castShadow: false,
         }));
         key.AddComponent(new spatial_grid_controller.SpatialGridController({
             grid: this._grid,
         }));
         key.AddComponent(new player_input.PickableComponent());
         key.AddComponent(new quest_component.QuestComponent());
-        key.SetPosition(new THREE.Vector3(330, -3, -520));
+        key.SetPosition(new THREE.Vector3(380, -3, -300));
         this._entityManager.Add(key, 'key.fbx');
 
         // 보물상자
@@ -294,15 +290,15 @@ class Map2 {
             resourcePath: './resources/treasure_chest/',
             resourceName: 'scene.gltf',
             scale: 0.35,
-            receiveShadow: true,
-            castShadow: true,
+            receiveShadow: false,
+            castShadow: false,
         }));
         treasure.AddComponent(new spatial_grid_controller.SpatialGridController({
             grid: this._grid,
         }));
         treasure.AddComponent(new player_input.PickableComponent());
         treasure.AddComponent(new quest_component.QuestComponent());
-        treasure.SetPosition(new THREE.Vector3(330, -3, -480));
+        treasure.SetPosition(new THREE.Vector3(430, 0, -400));
         this._entityManager.Add(treasure, 'treasure.fbx');
 
 
@@ -381,7 +377,7 @@ class Map2 {
             }
         }
 
-        for (let i = 0; i < 10; ++i) {
+        for (let i = 0; i < 70; ++i) {
 
             const monsters = [
                 {
@@ -438,7 +434,7 @@ class Map2 {
 
             npc.AddComponent(new attack_controller.AttackController({timing: 0.35}));
             npc.SetPosition(new THREE.Vector3(
-                (Math.random() * 2 - 1) * 500,
+                (Math.random() * 2 - 1) * 500 + 600,
                 0,
                 (Math.random() * 2 - 1) * 500));
             this._entityManager.Add(npc);
